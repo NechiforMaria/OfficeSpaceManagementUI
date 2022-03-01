@@ -31,7 +31,7 @@ class NavBar extends Component {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Management
+                    Management ts
                   </a>
                   <ul
                     className="dropdown-menu"
