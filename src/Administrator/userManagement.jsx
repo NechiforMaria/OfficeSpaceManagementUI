@@ -7,9 +7,6 @@ export class UserManagement extends Component {
         <h2>Add a new user </h2>
         <div className="create">
           <form>
-            <label>Id *</label>
-            <input type="text" required />
-
             <label>First Name *</label>
             <input type="text" required />
 
