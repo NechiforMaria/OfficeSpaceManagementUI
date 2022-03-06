@@ -1,29 +1,29 @@
 import React, { Component } from "react";
-import NavBar from "./Administrator/navbar";
+import NavBar from "./components/navbar/navbar";
 import "./App.css";
 import { UserStatus } from "./Administrator/userStatus";
-import Main from "./Main";
 import { Approval } from "./Administrator/Approval";
 import { DeskAssignment } from "./Administrator/DeskAssignment";
-import { Requiest } from "./Administrator/Requiest";
+import { Request } from "./Administrator/Request";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
+import { UserManagement } from "./Administrator/userManagement";
 
 class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <BrowserRouter>
+        <Router>
           <NavBar />
           <Switch>
             <Route path="/Approval">
               <Approval />
             </Route>
-            <Route path="/Requiest" component={Requiest} />
+            <Route path="/Request" component={Request} />
             <Route path="/DeskAssignment" component={DeskAssignment} />
+            <Route path="/userStatus" component={UserStatus} />
+            <Route path="/userManagement" component={UserManagement} />
           </Switch>
-        </BrowserRouter>
-        <UserStatus />
+        </Router>
       </React.Fragment>
     );
   }
