@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
-export class Requiest extends Component {
+export class Request extends Component {
   render() {
     return (
       <div>
-        <h3>This is Requiest page</h3>
+        <h3>This is Request page</h3>
       </div>
     );
   }
