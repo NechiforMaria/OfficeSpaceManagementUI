@@ -6,28 +6,29 @@ export class UserStatus extends Component {
     super(props);
 
     this.state = {
-      found: 1,
       users: [],
-      modalTitle: "",
-      Id: "",
-      FirstName: "",
-      LastName: "",
-      BuildingName: "",
-      WorkRomote: "",
-      EmailAddress: "",
-      Password: "",
-      Role: "",
-      Gender: "",
-      BirthDate: "",
-      Nationality: "",
+      userToAdd: {
+        modalTitle: "",
+        FName: "",
+        LName: "",
+        BuildingName: "",
+        WorkRemote: "",
+        Email: "",
+        Passw: "",
+        EmpRole: "",
+        Gender: "",
+        BirthDate: "",
+        Nationality: "",
+      },
     };
   }
 
   refreshList() {
-    fetch(variables.API_URL + "user")
+    fetch(variables.API_URL + "Employees")
       .then((response) => response.json())
       .then((data) => {
         this.setState({ users: data });
+        console.log(data);
       });
   }
 
@@ -35,36 +36,32 @@ export class UserStatus extends Component {
     this.refreshList();
   }
 
-  changeId = (e) => {
-    this.setState({ Id: e.target.value });
-  };
-
-  changeFirstName = (e) => {
-    this.setState({ FirstName: e.target.value });
+  changeFName = (e) => {
+    this.setState({ FName: e.target.value });
   };
 
   changeLastName = (e) => {
-    this.setState({ LastName: e.target.value });
+    this.setState({ LName: e.target.value });
   };
 
   changeBuildingName = (e) => {
     this.setState({ BuildingName: e.target.value });
   };
 
-  changeWorkRomote = (e) => {
-    this.setState({ WorkRomote: e.target.value });
+  changeWorkRemote = (e) => {
+    this.setState({ WorkRemote: e.target.value });
   };
 
-  changeEmailAddress = (e) => {
-    this.setState({ EmailAddress: e.target.value });
+  changeEmail = (e) => {
+    this.setState({ Email: e.target.value });
   };
 
-  changePassword = (e) => {
-    this.setState({ Password: e.target.value });
+  changePassw = (e) => {
+    this.setState({ Passw: e.target.value });
   };
 
   changeRole = (e) => {
-    this.setState({ Role: e.target.value });
+    this.setState({ EmpRole: e.target.value });
   };
 
   changeGender = (e) => {
@@ -82,49 +79,111 @@ export class UserStatus extends Component {
   addClick() {
     this.setState({
       modalTitle: "Add user",
-      Id: 0,
-      FirstName: "",
-      LastName: "",
+      FName: "",
+      LName: "",
       BuildingName: "",
-      WorkRomote: "",
-      EmailAddress: "",
-      Password: "",
-      Role: "",
+      WorkRemote: "",
+      Email: "",
+      Passw: "",
+      EmpRole: "",
       Gender: "",
       BirthDate: "",
       Nationality: "",
     });
+    console.log(this.state);
   }
 
-  updateClick(us) {
+  editClick(us) {
     this.setState({
       modalTitle: "Edit user",
-      Id: us.Id,
-      FirstName: us.FirstName,
-      LastName: us.LastName,
+      FName: us.FName,
+      LName: us.LName,
       BuildingName: us.BuildingName,
-      WorkRemote: us.WorkRomote,
-      EmailAddress: us.EmailAddress,
-      Password: us.Password,
-      Role: us.Role,
+      WorkRemote: us.WorkRemote,
+      Email: us.Email,
+      Passw: us.Passw,
+      EmpRole: us.EmpRole,
       Gender: us.Gender,
       BirthDate: us.BirthDate,
       Nationality: us.Nationality,
     });
   }
 
+  createClick() {
+    fetch(variables.API_URL + "Employees", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        FName: this.state.FName,
+        LName: this.state.LName,
+        BuildingName: this.state.BuildingName,
+        WorkRemote: this.state.WorkRemote,
+        Email: this.state.Email,
+        Passw: this.state.Passw,
+        EmpRole: this.state.EmpRole,
+        Gender: this.state.Gender,
+        BirthDate: this.state.BirthDate,
+        Nationality: this.state.Nationality,
+      }),
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          alert(result);
+          this.refreshList();
+        },
+        (error) => {
+          alert("Failed");
+        }
+      );
+  }
+
+  updateClick() {
+    fetch(variables.API_URL + "Employees", {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        FName: this.state.FName,
+        LName: this.state.LName,
+        BuildingName: this.state.BuildingName,
+        WorkRemote: this.state.WorkRemote,
+        Email: this.state.Email,
+        Passw: this.state.Passw,
+        EmpRole: this.state.EmpRole,
+        Gender: this.state.Gender,
+        BirthDate: this.state.BirthDate,
+        Nationality: this.state.Nationality,
+      }),
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          alert(result);
+          this.refreshList();
+        },
+        (error) => {
+          alert("Failed");
+        }
+      );
+  }
+
   render() {
     const {
       users,
       modalTitle,
-      Id,
-      FirstName,
-      LastName,
+      FName,
+      LName,
       BuildingName,
       WorkRemote,
-      EmailAddress,
-      Password,
-      Role,
+      Email,
+      Passw,
+      EmpRole,
       Gender,
       BirthDate,
       Nationality,
@@ -143,14 +202,13 @@ export class UserStatus extends Component {
         <table className="table table-striped">
           <thead>
             <tr>
-              <th>Id</th>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Building Name</th>
               <th>Work remote</th>
               <th>Email address</th>
-              <th>Password</th>
-              <th>Role</th>
+              <th>Passw</th>
+              <th>EmpRole</th>
               <th>Gender</th>
               <th>Birth date</th>
               <th>Nationality</th>
@@ -161,15 +219,14 @@ export class UserStatus extends Component {
           </thead>
           <tbody>
             {users.map((us) => (
-              <tr key={us.Id}>
-                <td>{us.Id}</td>
-                <td> {us.FirstName}</td>
-                <td> {us.LastName}</td>
+              <tr key={us.FName}>
+                <td> {us.FName}</td>
+                <td> {us.LName}</td>
                 <td> {us.BuildingName}</td>
                 <td> {us.WorkRemote}</td>
-                <td> {us.EmailAddress}</td>
-                <td> {us.Password}</td>
-                <td> {us.Role}</td>
+                <td> {us.Email}</td>
+                <td> {us.Passw}</td>
+                <td> {us.EmpRole}</td>
                 <td> {us.Gender}</td>
                 <td> {us.BirthDate}</td>
                 <td> {us.Nationality}</td>
@@ -245,42 +302,32 @@ export class UserStatus extends Component {
                   aria-label="Close"
                 ></button>
               </div>
+
               <div className="modal-body">
                 <div className="input-group mb-3">
-                  <span className="input-group-text">Id</span>
+                  <span className="input-group-text">First Name *</span>
                   <input
                     type="text"
                     className="form-control"
-                    value={Id}
-                    onChange={this.changeId}
+                    value={FName}
+                    onChange={this.changeFName}
                   />
                 </div>
               </div>
               <div className="modal-body">
                 <div className="input-group mb-3">
-                  <span className="input-group-text">FirstName</span>
+                  <span className="input-group-text">Last Name *</span>
                   <input
                     type="text"
                     className="form-control"
-                    value={FirstName}
-                    onChange={this.changeFirstName}
-                  />
-                </div>
-              </div>
-              <div className="modal-body">
-                <div className="input-group mb-3">
-                  <span className="input-group-text">Last Name</span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={LastName}
+                    value={LName}
                     onChange={this.changeLastName}
                   />
                 </div>
               </div>
               <div className="modal-body">
                 <div className="input-group mb-3">
-                  <span className="input-group-text">Building Name</span>
+                  <span className="input-group-text">Building Name *</span>
                   <input
                     type="text"
                     className="form-control"
@@ -291,7 +338,7 @@ export class UserStatus extends Component {
               </div>
               <div className="modal-body">
                 <div className="input-group mb-3">
-                  <span className="input-group-text">Work Remote</span>
+                  <span className="input-group-text">Work Remote *</span>
                   <input
                     type="text"
                     className="form-control"
@@ -302,40 +349,40 @@ export class UserStatus extends Component {
               </div>
               <div className="modal-body">
                 <div className="input-group mb-3">
-                  <span className="input-group-text">Email Address</span>
+                  <span className="input-group-text">Email Address *</span>
                   <input
                     type="text"
                     className="form-control"
-                    value={EmailAddress}
-                    onChange={this.changeEmailAddress}
+                    value={Email}
+                    onChange={this.changeEmail}
                   />
                 </div>
               </div>
               <div className="modal-body">
                 <div className="input-group mb-3">
-                  <span className="input-group-text">Password</span>
+                  <span className="input-group-text">Passw *</span>
                   <input
                     type="text"
                     className="form-control"
-                    value={Password}
-                    onChange={this.changePassword}
+                    value={Passw}
+                    onChange={this.changePassw}
                   />
                 </div>
               </div>
               <div className="modal-body">
                 <div className="input-group mb-3">
-                  <span className="input-group-text">Role</span>
+                  <span className="input-group-text">EmpRole *</span>
                   <input
                     type="text"
                     className="form-control"
-                    value={Role}
+                    value={EmpRole}
                     onChange={this.changeRole}
                   />
                 </div>
               </div>
               <div className="modal-body">
                 <div className="input-group mb-3">
-                  <span className="input-group-text">Gender</span>
+                  <span className="input-group-text">Gender *</span>
                   <input
                     type="text"
                     className="form-control"
@@ -367,27 +414,25 @@ export class UserStatus extends Component {
                 </div>
               </div>
 
-              {Id === 0 ? (
-                <button type="button" className="btn btn-primary float-start">
+              {modalTitle === "Add user" ? (
+                <button
+                  type="button"
+                  className="btn btn-primary float-start"
+                  onClick={() => this.createClick()}
+                >
                   Create
                 </button>
               ) : null}
 
-              {/*users.forEach((element) => {
-                if (element.Id == null) {
-                  return;
-                }
-                if (element.Id === Id) {
-                  this.found = 0;
-                  // this.setState({ found });
-                }
-              })}
-
-              {this.found.value === 1 ? (
-                <button type="button" className="btn btn-primary float-start">
-                  Create
+              {modalTitle === "Edit user" ? (
+                <button
+                  type="button"
+                  className="btn btn-primary float-start"
+                  onClick={() => this.updateClick()}
+                >
+                  Edit
                 </button>
-              ) : null*/}
+              ) : null}
             </div>
           </div>
         </div>
