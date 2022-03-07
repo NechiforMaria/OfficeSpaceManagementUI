@@ -7,19 +7,21 @@ export class UserStatus extends Component {
 
     this.state = {
       users: [],
-      userToAdd: {
-        modalTitle: "",
-        FName: "",
-        LName: "",
-        BuildingName: "",
-        WorkRemote: "",
-        Email: "",
-        Passw: "",
-        EmpRole: "",
-        Gender: "",
-        BirthDate: "",
-        Nationality: "",
-      },
+      modalTitle: "",
+      FName: "",
+      LName: "",
+      Email: "",
+      Passw: "",
+      EmpRole: "",
+      Gender: "",
+      BirthDate: "",
+      Nationality: "",
+      EmpStatus: "",
+      DeskNr: "",
+      OfficeName: "",
+      FloorNr: "",
+      BuildingName: "",
+      WorkRemote: "",
     };
   }
 
@@ -28,7 +30,6 @@ export class UserStatus extends Component {
       .then((response) => response.json())
       .then((data) => {
         this.setState({ users: data });
-        console.log(data);
       });
   }
 
@@ -42,14 +43,6 @@ export class UserStatus extends Component {
 
   changeLastName = (e) => {
     this.setState({ LName: e.target.value });
-  };
-
-  changeBuildingName = (e) => {
-    this.setState({ BuildingName: e.target.value });
-  };
-
-  changeWorkRemote = (e) => {
-    this.setState({ WorkRemote: e.target.value });
   };
 
   changeEmail = (e) => {
@@ -76,21 +69,48 @@ export class UserStatus extends Component {
     this.setState({ Nationality: e.target.value });
   };
 
+  changeEmpStatus = (e) => {
+    this.setState({ EmpStatus: e.target.value });
+  };
+
+  changeDeskNr = (e) => {
+    this.setState({ DeskNr: e.target.value });
+  };
+
+  changeOfficeName = (e) => {
+    this.setState({ OfficeName: e.target.value });
+  };
+
+  changeFloorNr = (e) => {
+    this.setState({ FloorNr: e.target.value });
+  };
+
+  changeBuildingName = (e) => {
+    this.setState({ BuildingName: e.target.value });
+  };
+
+  changeWorkRemote = (e) => {
+    this.setState({ WorkRemote: e.target.value });
+  };
+
   addClick() {
     this.setState({
       modalTitle: "Add user",
       FName: "",
       LName: "",
-      BuildingName: "",
-      WorkRemote: "",
       Email: "",
       Passw: "",
       EmpRole: "",
       Gender: "",
       BirthDate: "",
       Nationality: "",
+      EmpStatus: "",
+      DeskNr: "",
+      OfficeName: "",
+      FloorNr: "",
+      BuildingName: "",
+      WorkRemote: "",
     });
-    console.log(this.state);
   }
 
   editClick(us) {
@@ -98,14 +118,18 @@ export class UserStatus extends Component {
       modalTitle: "Edit user",
       FName: us.FName,
       LName: us.LName,
-      BuildingName: us.BuildingName,
-      WorkRemote: us.WorkRemote,
       Email: us.Email,
       Passw: us.Passw,
       EmpRole: us.EmpRole,
       Gender: us.Gender,
       BirthDate: us.BirthDate,
       Nationality: us.Nationality,
+      EmpStatus: us.EmpStatus,
+      DeskNr: us.DeskNr,
+      OfficeName: us.OfficeName,
+      FloorNr: us.FloorNr,
+      BuildingName: us.BuildingName,
+      WorkRemote: us.WorkRemote,
     });
   }
 
@@ -119,14 +143,18 @@ export class UserStatus extends Component {
       body: JSON.stringify({
         FName: this.state.FName,
         LName: this.state.LName,
-        BuildingName: this.state.BuildingName,
-        WorkRemote: this.state.WorkRemote,
         Email: this.state.Email,
         Passw: this.state.Passw,
         EmpRole: this.state.EmpRole,
         Gender: this.state.Gender,
         BirthDate: this.state.BirthDate,
         Nationality: this.state.Nationality,
+        EmpStatus: this.state.EmpStatus,
+        DeskNr: this.state.DeskNr,
+        OfficeName: this.state.OfficeName,
+        FloorNr: this.state.FloorNr,
+        BuildingName: this.state.BuildingName,
+        WorkRemote: this.state.WorkRemote,
       }),
     })
       .then((res) => res.json())
@@ -151,14 +179,18 @@ export class UserStatus extends Component {
       body: JSON.stringify({
         FName: this.state.FName,
         LName: this.state.LName,
-        BuildingName: this.state.BuildingName,
-        WorkRemote: this.state.WorkRemote,
         Email: this.state.Email,
         Passw: this.state.Passw,
         EmpRole: this.state.EmpRole,
         Gender: this.state.Gender,
         BirthDate: this.state.BirthDate,
         Nationality: this.state.Nationality,
+        EmpStatus: this.state.EmpStatus,
+        DeskNr: this.state.DeskNr,
+        OfficeName: this.state.OfficeName,
+        FloorNr: this.state.FloorNr,
+        BuildingName: this.state.BuildingName,
+        WorkRemote: this.state.WorkRemote,
       }),
     })
       .then((res) => res.json())
@@ -179,14 +211,18 @@ export class UserStatus extends Component {
       modalTitle,
       FName,
       LName,
-      BuildingName,
-      WorkRemote,
       Email,
       Passw,
       EmpRole,
       Gender,
       BirthDate,
       Nationality,
+      EmpStatus,
+      DeskNr,
+      OfficeName,
+      FloorNr,
+      BuildingName,
+      WorkRemote,
     } = this.state;
     return (
       <div>
@@ -199,19 +235,20 @@ export class UserStatus extends Component {
         >
           Add User
         </button>
+
         <table className="table table-striped">
           <thead>
             <tr>
               <th>First Name</th>
               <th>Last Name</th>
-              <th>Building Name</th>
-              <th>Work remote</th>
               <th>Email address</th>
-              <th>Passw</th>
-              <th>EmpRole</th>
+              <th>Password</th>
+              <th>Role</th>
               <th>Gender</th>
               <th>Birth date</th>
               <th>Nationality</th>
+              <th>Building Name</th>
+              <th>Work remote</th>
               <th>Update</th>
               <th>Activated</th>
               <th>Deactiveted</th>
@@ -222,14 +259,14 @@ export class UserStatus extends Component {
               <tr key={us.FName}>
                 <td> {us.FName}</td>
                 <td> {us.LName}</td>
-                <td> {us.BuildingName}</td>
-                <td> {us.WorkRemote}</td>
                 <td> {us.Email}</td>
                 <td> {us.Passw}</td>
                 <td> {us.EmpRole}</td>
                 <td> {us.Gender}</td>
                 <td> {us.BirthDate}</td>
                 <td> {us.Nationality}</td>
+                <td> {us.BuildingName}</td>
+                <td> {String(us.WorkRemote)}</td>
                 <td>
                   <button
                     type="button"
@@ -253,7 +290,9 @@ export class UserStatus extends Component {
                       />
                     </svg>
                   </button>
+                </td>
 
+                <td>
                   <button type="button" className="btn btn-light mr-1">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -266,7 +305,9 @@ export class UserStatus extends Component {
                       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                     </svg>
                   </button>
+                </td>
 
+                <td>
                   <button type="button" className="btn btn-light mr-1">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -314,6 +355,7 @@ export class UserStatus extends Component {
                   />
                 </div>
               </div>
+
               <div className="modal-body">
                 <div className="input-group mb-3">
                   <span className="input-group-text">Last Name *</span>
@@ -325,28 +367,7 @@ export class UserStatus extends Component {
                   />
                 </div>
               </div>
-              <div className="modal-body">
-                <div className="input-group mb-3">
-                  <span className="input-group-text">Building Name *</span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={BuildingName}
-                    onChange={this.changeBuildingName}
-                  />
-                </div>
-              </div>
-              <div className="modal-body">
-                <div className="input-group mb-3">
-                  <span className="input-group-text">Work Remote *</span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={WorkRemote}
-                    onChange={this.changeWorkRemote}
-                  />
-                </div>
-              </div>
+
               <div className="modal-body">
                 <div className="input-group mb-3">
                   <span className="input-group-text">Email Address *</span>
@@ -358,9 +379,10 @@ export class UserStatus extends Component {
                   />
                 </div>
               </div>
+
               <div className="modal-body">
                 <div className="input-group mb-3">
-                  <span className="input-group-text">Passw *</span>
+                  <span className="input-group-text">Password *</span>
                   <input
                     type="text"
                     className="form-control"
@@ -369,9 +391,10 @@ export class UserStatus extends Component {
                   />
                 </div>
               </div>
+
               <div className="modal-body">
                 <div className="input-group mb-3">
-                  <span className="input-group-text">EmpRole *</span>
+                  <span className="input-group-text">Role *</span>
                   <input
                     type="text"
                     className="form-control"
@@ -380,6 +403,7 @@ export class UserStatus extends Component {
                   />
                 </div>
               </div>
+
               <div className="modal-body">
                 <div className="input-group mb-3">
                   <span className="input-group-text">Gender *</span>
@@ -391,6 +415,7 @@ export class UserStatus extends Component {
                   />
                 </div>
               </div>
+
               <div className="modal-body">
                 <div className="input-group mb-3">
                   <span className="input-group-text">Birth Date</span>
@@ -402,6 +427,7 @@ export class UserStatus extends Component {
                   />
                 </div>
               </div>
+
               <div className="modal-body">
                 <div className="input-group mb-3">
                   <span className="input-group-text">Nationality</span>
@@ -410,6 +436,78 @@ export class UserStatus extends Component {
                     className="form-control"
                     value={Nationality}
                     onChange={this.changeNationality}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Emp Status *</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={EmpStatus}
+                    onChange={this.changeEmpStatus}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Desk Nr *</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={DeskNr}
+                    onChange={this.changeDeskNr}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Office Name *</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={OfficeName}
+                    onChange={this.changeOfficeName}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Floor Nr *</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={FloorNr}
+                    onChange={this.changeFloorNr}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Building Name *</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={BuildingName}
+                    onChange={this.changeBuildingName}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Work Remote *</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={WorkRemote}
+                    onChange={this.changeWorkRemote}
                   />
                 </div>
               </div>
