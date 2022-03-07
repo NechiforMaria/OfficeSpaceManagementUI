@@ -1,0 +1,96 @@
+body {
+  background-image: url("./images/office.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: lighten;
+}
+input {
+  background-color: rgb(245, 245, 220, 0.75);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  text-align: left;
+  border-radius: 10px;
+  font-weight: italic;
+  padding-left: 50px;
+  padding-right: 50px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    "Open Sans", "Helvetica Neue", sans-serif;
+}
+i {
+  position: absolute;
+  margin-left: 10px;
+  margin-top: 10px;
+  color: #4a3920;
+}
+.fa-user-group {
+  position: absolute;
+  left: 42%;
+  font-size: 45px;
+  margin-top: 0px;
+  color: #634c2b;
+}
+::placeholder {
+  font-style: italic;
+}
+label {
+  font-size: 25px;
+  text-align: right;
+  margin-top: 0;
+}
+.accessAccount {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 19px;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+hr {
+  background-color: #634c2b;
+  border: 0;
+  height: 1px;
+}
+.container-fluid {
+  text-align: center;
+  background-color: rgba(243, 239, 232, 0.7);
+  position: absolute;
+  margin-top: 250px;
+  margin-left: 750px;
+  padding-top: 75px;
+  padding-bottom: 75px;
+  padding-right: 75px;
+  padding-left: 75px;
+  border-radius: 20px;
+}
+
+.companyName {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 45px;
+  margin-bottom: 30px;
+  text-align: center;
+  padding-bottom: 60px;
+  color: #4a3920;
+}
+.lblBox {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 18px;
+  margin-right: 17px;
+  margin-top: 10px;
+}
+.btnLI {
+  font-size: 17px;
+  background-color: #634c2b;
+  margin-top: 15px;
+  padding-right: 110px;
+  padding-left: 110px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  border-color: #634c2b;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    "Open Sans", "Helvetica Neue", sans-serif;
+}
