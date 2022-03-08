@@ -5,102 +5,78 @@ export class LoginForm extends React.Component {
     super(props);
 
     this.state = {
-      input: {},
-      errors: {},
+      username: "",
+      password: "",
     };
-    alert("In progress");
-    this.handleChange = this.handleChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleChange(event) {
-    let input = this.state.input;
-    input[event.target.name] = event.target.value;
-
+  handleUsernameChange(event) {
     this.setState({
-      input,
+      username: event.target.value,
+    });
+  }
+  handlePasswordChange(event) {
+    this.setState({
+      password: event.target.value,
     });
   }
   handleSubmit(event) {
+    var Username = "user";
+    var passUsername = "user";
     event.preventDefault();
-    if (this.validate()) {
-      console.log(this.state);
-
-      let input = {};
-      input["username"] = "";
-      input["password"] = "";
-      this.setState({input: input});
+    if (this.state.username === Username && this.state.password === passUsername) alert("Login ok");
+    else {
+      alert("Login failed");
     }
   }
 
-  validate() {
-    let input = this.state.input;
-    let errors = {};
-    let isValid = true;
-
-    if (!input["username"]) {
-      isValid = false;
-      errors["username"] = "Please enter your username.";
-    }
-    if (input["username"] === "user") {
-      alert("Hi");
-    }
-    if (!input["password"]) {
-      isValid = false;
-      errors["password"] = "Please enter your password.";
-    }
-    this.setState({
-      errors: errors,
-    });
-
-    return isValid;
-  }
   render() {
     return (
-      <div class="container-fluid">
+      <div className="container-fluid">
         <form id="login-form" onSubmit={this.handleSubmit}>
-          <label class="companyName">No More Bugs</label>
+          <label className="companyName">No More Bugs</label>
           <br />
-          <hr class="solid" />
+          <hr className="solid" />
           <br />
-          <i class="fa-solid fa-user-group"></i>
-          <br />
-          <br />
-          <br />
-          <label class="label accessAccount">Login to access your account</label>
+          <i className="fa-solid fa-user-group"></i>
           <br />
           <br />
-          <i class="fa-solid fa-user"></i>
+          <br />
+          <label className="label accessAccount">Login to access your account</label>
+          <br />
+          <br />
+          <i className="fa-solid fa-user"></i>
           <input
-            class="input-field"
+            className="input-field"
             type="text"
-            placeholder="Username"
             id="username"
-            value={this.state.input.username}
-            onChange={this.handleChange}
+            onChange={this.handleUsernameChange}
           />
+
           <br />
-          <i class="fa-solid fa-lock"></i>
+          <i className="fa-solid fa-lock"></i>
           <input
-            class="input-field"
+            className="input-field"
             type="password"
             id="password"
             placeholder="Password"
-            value={this.state.input.password}
-            onChange={this.handleChange}
+            onChange={this.handlePasswordChange}
           />
           <br />
-          <input class="checkbox" type="checkbox" />
-          <span class="checkbox"></span>
-          <label class="label lblBox" for="checkbox">
+          <input className="checkbox" type="checkbox" />
+          <span className="checkbox"></span>
+          <label className="label lblBox" htmlFor="checkbox">
             Remember Me
           </label>
           <br />
           <input
             type="submit"
-            class="btnLI"
+            className="btnLI"
             id="login-form-submit"
             value="Login"
-            onclick={this.handleSubmit}
+            onClick={this.handleSubmit}
           />
           <br />
         </form>
@@ -108,4 +84,8 @@ export class LoginForm extends React.Component {
     );
   }
 }
+LoginForm.defaultProps = {
+  Username: "",
+  Password: "",
+};
 export default LoginForm;

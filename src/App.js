@@ -6,13 +6,14 @@ import {Approval} from "./Administrator/Approval";
 import {DeskAssignment} from "./Administrator/DeskAssignment";
 import {Request} from "./Administrator/Request";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import {UserManagement} from "./Administrator/userManagement";
+
 import LoginForm from "./components/login/login";
 class App extends Component {
   render() {
     return (
       <React.Fragment>
         <Router>
+          <LoginForm />
           <NavBar />
           <Switch>
             <Route path="/Approval">
@@ -21,7 +22,6 @@ class App extends Component {
             <Route path="/Request" component={Request} />
             <Route path="/DeskAssignment" component={DeskAssignment} />
             <Route path="/userStatus" component={UserStatus} />
-            <Route path="/userManagement" component={UserManagement} />
           </Switch>
         </Router>
       </React.Fragment>
