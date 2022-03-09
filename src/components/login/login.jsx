@@ -36,8 +36,9 @@ export class LoginForm extends React.Component {
     return (
       <div className="container-fluid">
         <form id="login-form" onSubmit={this.handleSubmit}>
-          <label className="companyName">No More Bugs</label>
-          <br />
+          <label className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <span className="navbar-brand"> No More Bugs</span>
+          </label>
           <hr className="solid" />
           <br />
           <i className="fa-solid fa-user-group"></i>
