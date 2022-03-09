@@ -46,13 +46,8 @@ class NavBar extends Component {
                     className="dropdown-menu"
                     aria-labelledby="navbarDropdownMenuLink"
                   >
-                    <li className="dropdown-item ">
-                      <NavLink className="nav-link" to="/userManagement">
-                        User Managament
-                      </NavLink>
-                    </li>
                     <li className="dropdown-item color: black">
-                      <NavLink className="nav-link" to="/userStatus">
+                      <NavLink className="nav-link" to="/buildingManagement">
                         Building Management
                       </NavLink>
                     </li>

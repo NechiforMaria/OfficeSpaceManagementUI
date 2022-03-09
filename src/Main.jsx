@@ -1,7 +1,8 @@
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { Approval } from "./Administrator/Approval";
 import { DeskAssignment } from "./Administrator/DeskAssignment";
-import { Requiest } from "./Administrator/Requiest";
+import { Request } from "./Administrator/Request";
+import { UserStatus } from "./Administrator/userStatus";
 
 function Main() {
   return (
@@ -10,8 +11,9 @@ function Main() {
         <Route path="/Approval">
           <Approval />
         </Route>
-        <Route path="/Requiest" component={Requiest} />
+        <Route path="/Request" component={Request} />
         <Route path="/DeskAssignment" component={DeskAssignment} />
+        <Route path="/userStatus" component={UserStatus} />
       </Switch>
     </Router>
   );

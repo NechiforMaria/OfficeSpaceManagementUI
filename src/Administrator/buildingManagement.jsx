@@ -133,6 +133,30 @@ export class BuildingManagement extends Component {
       this.state;
     return (
       <div>
+        <label className=" m-2">Search a specific building: </label>
+
+        <span class="Icon-inside">
+          <input
+            class="input-field m-2"
+            type="text"
+            placeholder="Search"
+            name="search"
+          ></input>
+          <button class="btn btn-primary ">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-search"
+              viewBox="0 0 16 16"
+              alignmentBaseline="center"
+            >
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg>
+          </button>
+        </span>
+
         <button
           type="button"
           className="btn btn-primary m-2 float-end"
