@@ -16,6 +16,7 @@ export default class Slider extends React.Component {
           type="range"
           min={0}
           max={100}
+          step={25}
           value={this.state.value}
           class="form-range m-2"
           onChange={this.handlerOnChange}
