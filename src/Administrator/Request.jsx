@@ -14,12 +14,16 @@ export class Request extends Component {
         </label>
         <Slider />
         <div>
-          <label className=" m-2">
+          <label className="Reason m-2">
             Reason or which they are making this request *
           </label>
         </div>
         <div>
-          <input className="comment m-2"></input>
+          <textarea
+            class="form-comment m-2"
+            placeholder="Leave a comment here"
+            id="floatingTextarea"
+          ></textarea>
         </div>
 
         <div>
