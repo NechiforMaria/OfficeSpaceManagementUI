@@ -52,41 +52,17 @@ class NavBar extends Component {
                       </NavLink>
                     </li>
                     <li className="dropdown-item color: black">
-                      <NavLink className="nav-link" to="/userStatus">
-                        Office Management
+                      <NavLink className="nav-link" to="/userManagement">
+                        User Management
                       </NavLink>
                     </li>
                   </ul>
                 </li>
 
-                <li className="nav-item dropdown me-2 ">
-                  <span
-                    className="nav-link dropdown-toggle"
-                    href="#"
-                    id="navbarDropdownMenuLink"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Status
-                  </span>
-                  <ul
-                    style={mystyle}
-                    className="dropdown-menu"
-                    aria-labelledby="navbarDropdownMenuLink"
-                  >
-                    <li className="dropdown-item color: black">
-                      <NavLink className="nav-link" to="/userStatus">
-                        User Status
-                      </NavLink>
-                    </li>
-
-                    <li className="dropdown-item">
-                      <NavLink className="nav-link" to="/DeskAssignment">
-                        Office Status
-                      </NavLink>
-                    </li>
-                  </ul>
+                <li>
+                  <NavLink className="nav-link" to="/officeStatus">
+                    Office Status
+                  </NavLink>
                 </li>
 
                 <li>
