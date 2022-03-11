@@ -8,12 +8,13 @@ export class Approval extends Component {
     this.state = {
       request: [],
       EmployeeName: "",
-      Reason: "",
+      RemotePercent: "",
+      RequestMsg: "",
     };
   }
 
   refreshList() {
-    fetch(variables.API_URL + "Request")
+    fetch(variables.API_URL + "Requests")
       .then((response) => response.json())
       .then((data) => {
         this.setState({ request: data });
@@ -25,7 +26,7 @@ export class Approval extends Component {
   }
 
   render() {
-    const { request, EmployeeName, Reason } = this.state;
+    const { request } = this.state;
     return (
       <div>
         <h4>Request management</h4>
@@ -34,7 +35,8 @@ export class Approval extends Component {
           <thead>
             <tr>
               <th>Employee Name</th>
-              <th>Reason</th>
+              <th>Remote Percent</th>
+              <th>RequestMsg</th>
               <th>Approve</th>
               <th>Reject</th>
             </tr>
@@ -43,7 +45,8 @@ export class Approval extends Component {
             {request.map((req) => (
               <tr key={req.EmployeeName}>
                 <td> {req.EmployeeName}</td>
-                <td> {req.Reason}</td>
+                <td>{req.RemotePercent + "%"}</td>
+                <td> {req.RequestMsg}</td>
                 <td>
                   <button type="button" className="btn btn-primary mr-1">
                     Approve
