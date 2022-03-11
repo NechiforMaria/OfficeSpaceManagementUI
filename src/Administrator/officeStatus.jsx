@@ -10,18 +10,18 @@ export class officeStatus extends Component {
       office: [],
       OfficeName: "",
       BuildingName: "",
-      FloorNr: "",
-      DesksCount: "",
-      FreeDesksCount: "",
+      FloorNo: "",
       OfficeAdminName: "",
+      TotalDesksCount: "",
+      UsableDesksCount: "",
       OccupiedDesksCount: "",
-
+      FreeDesksCount: "",
       Occupiedpercentage: "",
     };
   }
 
   refreshList() {
-    fetch(variables.API_URL + "Office")
+    fetch(variables.API_URL + "Offices")
       .then((response) => response.json())
       .then((data) => {
         this.setState({ office: data });
@@ -32,66 +32,25 @@ export class officeStatus extends Component {
     this.refreshList();
   }
 
-  changeOfficeName = (e) => {
-    this.setState({ OfficeName: e.target.value });
-  };
-
-  changeBuildingName = (e) => {
-    this.setState({ BuildingName: e.target.value });
-  };
-
-  changeFloorNr = (e) => {
-    this.setState({ FloorNr: e.target.value });
-  };
-
-  changeDesksCount = (e) => {
-    this.setState({ DesksCount: e.target.value });
-  };
-  changeFreeDesksCount = (e) => {
-    this.setState({ FreeDesksCount: e.target.value });
-  };
-
-  changeOfficeOfficeAdminName = (e) => {
-    this.setState({ OfficeAdminName: e.target.value });
-  };
-
-  changeOccupiedDesksCount = (e) => {
-    this.setState({ OccupiedDesksCount: e.target.value });
-  };
-
-  changeOccupiedDesksCount = (e) => {
-    this.setState({ OccupiedDesksCount: e.target.value });
-  };
-
   render() {
-    const {
-      office,
-      OfficeName,
-      BuildingName,
-      FloorNr,
-      DesksCount,
-      FreeDesksCount,
-      OfficeAdminName,
-      OccupiedDesksCount,
-    } = this.state;
-
+    const { office } = this.state;
     return (
       <div>
         <label className=" m-2">Search a specific office: </label>
 
         <Search />
-
         <table className="table table-striped">
           <thead>
             <tr>
               <th>Office Name</th>
               <th>Building Name</th>
               <th>Floor Nr</th>
-              <th>All Employees</th>
-              <th>Desks Count</th>
-              <th>Free Desks Count</th>
               <th>Office Adimn Name</th>
+              <th>All Employees</th>
+              <th>Total Desks Count</th>
+              <th>Usable Desks Count</th>
               <th>Occupied Desks Count</th>
+              <th>Free Desks Count</th>
               <th>Occupied percentage</th>
             </tr>
           </thead>
@@ -100,14 +59,14 @@ export class officeStatus extends Component {
               <tr key={of.OfficeName}>
                 <td> {of.OfficeName}</td>
                 <td> {of.BuildingName}</td>
-                <td> {of.FloorNr}</td>
+                <td> {of.FloorNo}</td>
+                <td> {of.OfficeAdminName}</td>
                 <td>
                   <button
                     type="button"
                     className="btn btn-light mr-1"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
-                    onClick={() => this.editClick(of)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -125,10 +84,11 @@ export class officeStatus extends Component {
                     </svg>
                   </button>
                 </td>
-                <td> {of.DesksCount}</td>
-                <td> {of.FreeDesksCount}</td>
-                <td> {of.OfficeAdminName}</td>
+                <td> {of.TotalDesksCount}</td>
+                <td> {of.UsableDesksCount}</td>
                 <td> {of.OccupiedDesksCount}</td>
+                <td> {of.UsableDesksCount - of.OccupiedDesksCount}</td>
+                <td>{of.OccupiedDesksCount / of.OccupiedDesksCount + "%"}</td>
               </tr>
             ))}
           </tbody>
