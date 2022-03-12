@@ -1,5 +1,7 @@
 import React from "react";
-
+import "./login.css";
+import {BsFillPersonFill, BsFillLockFill} from "react-icons/bs";
+import {HiUserGroup} from "react-icons/hi";
 export class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -34,53 +36,62 @@ export class LoginForm extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <form id="login-form" onSubmit={this.handleSubmit}>
-          <label className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <span className="navbar-brand"> No More Bugs</span>
-          </label>
+      <div>
+        <label className="navbar navbar-expand-lg navbar-dark bg-dark">
+          <span className="navbar-brand"> No More Bugs</span>
           <hr className="solid" />
-          <br />
-          <i className="fa-solid fa-user-group"></i>
-          <br />
-          <br />
-          <br />
-          <label className="label accessAccount">Login to access your account</label>
-          <br />
-          <br />
-          <i className="fa-solid fa-user"></i>
-          <input
-            className="input-field"
-            type="text"
-            id="username"
-            onChange={this.handleUsernameChange}
-          />
+        </label>
+        <div className="container">
+          <form id="login-form" onSubmit={this.handleSubmit}>
+            <br />
+            <i>
+              <HiUserGroup size={40} style={{position: "absolute", top: 100, left: -25}} />
+            </i>
+            <br />
+            <br />
+            <br />
+            <label className="label accessAccount">Login to access your account</label>
+            <br />
+            <br />
+            <i>
+              <BsFillPersonFill size={30} />
+            </i>
+            <input
+              className="input-field"
+              type="text"
+              id="username"
+              placeholder="Username"
+              onChange={this.handleUsernameChange}
+            />
 
-          <br />
-          <i className="fa-solid fa-lock"></i>
-          <input
-            className="input-field"
-            type="password"
-            id="password"
-            placeholder="Password"
-            onChange={this.handlePasswordChange}
-          />
-          <br />
-          <input className="checkbox" type="checkbox" />
-          <span className="checkbox"></span>
-          <label className="label lblBox" htmlFor="checkbox">
-            Remember Me
-          </label>
-          <br />
-          <input
-            type="submit"
-            className="btnLI"
-            id="login-form-submit"
-            value="Login"
-            onClick={this.handleSubmit}
-          />
-          <br />
-        </form>
+            <br />
+            <i>
+              <BsFillLockFill size={30} />
+            </i>
+            <input
+              className="input-field"
+              type="password"
+              id="password"
+              placeholder="Password"
+              onChange={this.handlePasswordChange}
+            />
+            <br />
+            <input className="checkbox" type="checkbox" />
+            <span className="checkbox"></span>
+            <label className="label lblBox" htmlFor="checkbox">
+              Remember Me
+            </label>
+            <br />
+            <input
+              type="submit"
+              className="btnLI"
+              id="login-form-submit"
+              value="Login"
+              onClick={this.handleSubmit}
+            />
+            <br />
+          </form>
+        </div>
       </div>
     );
   }
