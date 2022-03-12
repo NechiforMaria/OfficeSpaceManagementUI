@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Search } from "../components/Search";
 import { variables } from "../components/Variables";
 
 export class officeStatus extends Component {
@@ -17,16 +16,36 @@ export class officeStatus extends Component {
       OccupiedDesksCount: "",
       FreeDesksCount: "",
       Occupiedpercentage: "",
+
+      OfficeNameFilter: "",
+      OfficeWithoutFilter: [],
     };
+  }
+
+  FilterFn() {
+    var OfficeNameFilter = this.state.OfficeNameFilter;
+
+    var filteredData = this.state.OfficeWithoutFilter.filter(function (el) {
+      return String(el.OfficeName)
+        .toLowerCase()
+        .includes(OfficeNameFilter.trim().toLowerCase());
+    });
+
+    this.setState({ office: filteredData });
   }
 
   refreshList() {
     fetch(variables.API_URL + "Offices")
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ office: data });
+        this.setState({ office: data, OfficeWithoutFilter: data });
       });
   }
+
+  changeOfficeNameFilter = (e) => {
+    this.state.OfficeNameFilter = e.target.value;
+    this.FilterFn();
+  };
 
   componentDidMount() {
     this.refreshList();
@@ -38,7 +57,15 @@ export class officeStatus extends Component {
       <div>
         <label className=" m-2">Search a specific office: </label>
 
-        <Search />
+        <span className="Icon-inside">
+          <input
+            className="input-field mb-3"
+            type="text"
+            placeholder="Search"
+            name="search"
+            onChange={this.changeOfficeNameFilter}
+          />
+        </span>
         <table className="table table-striped">
           <thead>
             <tr>
@@ -73,13 +100,17 @@ export class officeStatus extends Component {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      className="bi bi-pencil-square"
+                      className="bi bi-list-task"
                       viewBox="0 0 16 16"
                     >
-                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                       <path
                         fillRule="evenodd"
-                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                        d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"
+                      />
+                      <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z" />
+                      <path
+                        fillRule="evenodd"
+                        d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"
                       />
                     </svg>
                   </button>
