@@ -36,28 +36,34 @@ export class LoginForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="bkgImage">
         <label className="navbar navbar-expand-lg navbar-dark bg-dark">
           <span className="navbar-brand"> No More Bugs</span>
-          <hr className="solid" />
+          <hr className="dotted" />
         </label>
         <div className="container">
           <form id="login-form" onSubmit={this.handleSubmit}>
             <br />
             <i>
-              <HiUserGroup size={40} style={{position: "absolute", top: 100, left: -25}} />
+              <HiUserGroup
+                size={40}
+                style={{position: "absolute", top: 100, left: -25, marginTop: 60}}
+              />
             </i>
             <br />
             <br />
             <br />
-            <label className="label accessAccount">Login to access your account</label>
+            <label className="label accessAccount">
+              Login to access
+              <br /> your account
+            </label>
             <br />
             <br />
             <i>
               <BsFillPersonFill size={30} />
             </i>
             <input
-              className="input-field"
+              className="input-fieldUsername"
               type="text"
               id="username"
               placeholder="Username"
@@ -69,7 +75,7 @@ export class LoginForm extends React.Component {
               <BsFillLockFill size={30} />
             </i>
             <input
-              className="input-field"
+              className="input-fieldPassword"
               type="password"
               id="password"
               placeholder="Password"
