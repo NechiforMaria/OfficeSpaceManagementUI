@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Search } from "../components/Search";
 import { variables } from "../components/Variables";
+import moment from "moment";
 
 export class UserManagement extends Component {
   constructor(props) {
@@ -9,8 +9,9 @@ export class UserManagement extends Component {
     this.state = {
       users: [],
       modalTitle: "",
-      FName: "",
-      LName: "",
+      ID: "",
+      FirstName: "",
+      LastName: "",
       Email: "",
       Passw: "",
       EmpRole: "",
@@ -18,32 +19,52 @@ export class UserManagement extends Component {
       BirthDate: "",
       Nationality: "",
       EmpStatus: "",
-      DeskNr: "",
+      DeskNo: "",
       OfficeName: "",
-      FloorNr: "",
+      FloorNo: "",
       BuildingName: "",
       WorkRemote: "",
+
+      UsersNameFilter: "",
+      UsersWithoutFilter: [],
     };
+  }
+
+  FilterFn() {
+    var UsersNameFilter = this.state.UsersNameFilter;
+
+    var filteredData = this.state.UsersWithoutFilter.filter(function (el) {
+      return String(el.FirstName)
+        .toLowerCase()
+        .includes(UsersNameFilter.trim().toLowerCase());
+    });
+
+    this.setState({ users: filteredData });
   }
 
   refreshList() {
     fetch(variables.API_URL + "Employees")
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ users: data });
+        this.setState({ users: data, UsersWithoutFilter: data });
       });
   }
+
+  changeUsersNameFilter = (e) => {
+    this.state.UsersNameFilter = e.target.value;
+    this.FilterFn();
+  };
 
   componentDidMount() {
     this.refreshList();
   }
 
-  changeFName = (e) => {
-    this.setState({ FName: e.target.value });
+  changeFirstName = (e) => {
+    this.setState({ FirstName: e.target.value });
   };
 
   changeLastName = (e) => {
-    this.setState({ LName: e.target.value });
+    this.setState({ LastName: e.target.value });
   };
 
   changeEmail = (e) => {
@@ -74,16 +95,16 @@ export class UserManagement extends Component {
     this.setState({ EmpStatus: e.target.value });
   };
 
-  changeDeskNr = (e) => {
-    this.setState({ DeskNr: e.target.value });
+  changeDeskNo = (e) => {
+    this.setState({ DeskNo: e.target.value });
   };
 
   changeOfficeName = (e) => {
     this.setState({ OfficeName: e.target.value });
   };
 
-  changeFloorNr = (e) => {
-    this.setState({ FloorNr: e.target.value });
+  changeFloorNo = (e) => {
+    this.setState({ FloorNo: e.target.value });
   };
 
   changeBuildingName = (e) => {
@@ -97,8 +118,8 @@ export class UserManagement extends Component {
   addClick() {
     this.setState({
       modalTitle: "Add user",
-      FName: "",
-      LName: "",
+      FirstName: "",
+      LastName: "",
       Email: "",
       Passw: "",
       EmpRole: "",
@@ -106,9 +127,9 @@ export class UserManagement extends Component {
       BirthDate: "",
       Nationality: "",
       EmpStatus: "",
-      DeskNr: "",
+      DeskNo: "",
       OfficeName: "",
-      FloorNr: "",
+      FloorNo: "",
       BuildingName: "",
       WorkRemote: "",
     });
@@ -117,8 +138,9 @@ export class UserManagement extends Component {
   editClick(us) {
     this.setState({
       modalTitle: "Edit user",
-      FName: us.FName,
-      LName: us.LName,
+      ID: us.ID,
+      FirstName: us.FirstName,
+      LastName: us.LastName,
       Email: us.Email,
       Passw: us.Passw,
       EmpRole: us.EmpRole,
@@ -126,9 +148,9 @@ export class UserManagement extends Component {
       BirthDate: us.BirthDate,
       Nationality: us.Nationality,
       EmpStatus: us.EmpStatus,
-      DeskNr: us.DeskNr,
+      DeskNo: us.DeskNo,
       OfficeName: us.OfficeName,
-      FloorNr: us.FloorNr,
+      FloorNo: us.FloorNo,
       BuildingName: us.BuildingName,
       WorkRemote: us.WorkRemote,
     });
@@ -142,8 +164,8 @@ export class UserManagement extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        FName: this.state.FName,
-        LName: this.state.LName,
+        FirstName: this.state.FirstName,
+        LastName: this.state.LastName,
         Email: this.state.Email,
         Passw: this.state.Passw,
         EmpRole: this.state.EmpRole,
@@ -151,9 +173,9 @@ export class UserManagement extends Component {
         BirthDate: this.state.BirthDate,
         Nationality: this.state.Nationality,
         EmpStatus: this.state.EmpStatus,
-        DeskNr: this.state.DeskNr,
+        DeskNo: this.state.DeskNo,
         OfficeName: this.state.OfficeName,
-        FloorNr: this.state.FloorNr,
+        FloorNo: this.state.FloorNo,
         BuildingName: this.state.BuildingName,
         WorkRemote: this.state.WorkRemote,
       }),
@@ -178,8 +200,9 @@ export class UserManagement extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        FName: this.state.FName,
-        LName: this.state.LName,
+        ID: this.state.ID,
+        FirstName: this.state.FirstName,
+        LastName: this.state.LastName,
         Email: this.state.Email,
         Passw: this.state.Passw,
         EmpRole: this.state.EmpRole,
@@ -187,9 +210,9 @@ export class UserManagement extends Component {
         BirthDate: this.state.BirthDate,
         Nationality: this.state.Nationality,
         EmpStatus: this.state.EmpStatus,
-        DeskNr: this.state.DeskNr,
+        DeskNo: this.state.DeskNo,
         OfficeName: this.state.OfficeName,
-        FloorNr: this.state.FloorNr,
+        FloorNo: this.state.FloorNo,
         BuildingName: this.state.BuildingName,
         WorkRemote: this.state.WorkRemote,
       }),
@@ -210,8 +233,8 @@ export class UserManagement extends Component {
     const {
       users,
       modalTitle,
-      FName,
-      LName,
+      FirstName,
+      LastName,
       Email,
       Passw,
       EmpRole,
@@ -219,9 +242,9 @@ export class UserManagement extends Component {
       BirthDate,
       Nationality,
       EmpStatus,
-      DeskNr,
+      DeskNo,
       OfficeName,
-      FloorNr,
+      FloorNo,
       BuildingName,
       WorkRemote,
     } = this.state;
@@ -229,7 +252,16 @@ export class UserManagement extends Component {
       <div>
         <label className=" m-2">Search a specific user: </label>
 
-        <Search />
+        <span className="Icon-inside">
+          <input
+            className="input-field mb-3"
+            type="text"
+            placeholder="Search"
+            name="search"
+            onChange={this.changeUsersNameFilter}
+          />
+        </span>
+
         <button
           type="button"
           className="btn btn-primary m-2 float-end"
@@ -260,9 +292,9 @@ export class UserManagement extends Component {
           </thead>
           <tbody>
             {users.map((us) => (
-              <tr key={us.FName}>
-                <td> {us.FName}</td>
-                <td> {us.LName}</td>
+              <tr key={us.ID}>
+                <td> {us.FirstName}</td>
+                <td> {us.LastName}</td>
                 <td> {us.Email}</td>
                 <td> {us.Passw}</td>
                 <td> {us.EmpRole}</td>
@@ -270,7 +302,7 @@ export class UserManagement extends Component {
                 <td> {us.BirthDate}</td>
                 <td> {us.Nationality}</td>
                 <td> {us.BuildingName}</td>
-                <td> {String(us.WorkRemote)}</td>
+                <td> {us.WorkRemote}</td>
                 <td>
                   <button
                     type="button"
@@ -354,8 +386,8 @@ export class UserManagement extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    value={FName}
-                    onChange={this.changeFName}
+                    value={FirstName}
+                    onChange={this.changeFirstName}
                   />
                 </div>
               </div>
@@ -366,7 +398,7 @@ export class UserManagement extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    value={LName}
+                    value={LastName}
                     onChange={this.changeLastName}
                   />
                 </div>
@@ -405,7 +437,7 @@ export class UserManagement extends Component {
                     value={EmpRole}
                     onChange={this.changeRole}
                   >
-                    <option value="" disabled selected>
+                    <option value="" disabled defaultValue>
                       {" "}
                       Choose Role{" "}
                     </option>
@@ -426,7 +458,7 @@ export class UserManagement extends Component {
                     value={Gender}
                     onChange={this.changeGender}
                   >
-                    <option value="" disabled selected>
+                    <option value="" disabled defaultValue>
                       {" "}
                       Choose gender{" "}
                     </option>
@@ -440,7 +472,7 @@ export class UserManagement extends Component {
                 <div className="input-group mb-3">
                   <span className="input-group-text">Birth Date</span>
                   <input
-                    type="text"
+                    type="date"
                     className="form-control"
                     value={BirthDate}
                     onChange={this.changeBirthDate}
@@ -469,7 +501,7 @@ export class UserManagement extends Component {
                     value={EmpStatus}
                     onChange={this.changeEmpStatus}
                   >
-                    <option value="" disabled selected>
+                    <option value="" disabled defaultValue>
                       {" "}
                       Choose Status{" "}
                     </option>
@@ -485,8 +517,8 @@ export class UserManagement extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    value={DeskNr}
-                    onChange={this.changeDeskNr}
+                    value={DeskNo}
+                    onChange={this.changeDeskNo}
                   />
                 </div>
               </div>
@@ -509,8 +541,8 @@ export class UserManagement extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    value={FloorNr}
-                    onChange={this.changeFloorNr}
+                    value={FloorNo}
+                    onChange={this.changeFloorNo}
                   />
                 </div>
               </div>
@@ -530,19 +562,20 @@ export class UserManagement extends Component {
               <div className="modal-body">
                 <div className="input-group mb-3">
                   <span className="input-group-text">Work Remote *</span>
+
                   <select
                     type="text"
                     className="form-control"
                     value={WorkRemote}
                     onChange={this.changeWorkRemote}
                   >
-                    <option value="" disabled selected>
+                    <option value="" disabled defaultValue>
                       {" "}
                       Choose percentage{" "}
                     </option>
                     <option>No</option>
-                    <option>Fully remote</option>
-                    <option>Partially remote</option>
+                    <option>Fully</option>
+                    <option>Partially</option>
                   </select>
                 </div>
               </div>
