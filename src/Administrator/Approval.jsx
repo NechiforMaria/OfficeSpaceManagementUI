@@ -6,10 +6,11 @@ export class Approval extends Component {
     super(props);
 
     this.state = {
-      request: [],
+      requests: [],
       EmployeeName: "",
       RemotePercent: "",
       RequestMsg: "",
+      RequestNo: "",
     };
   }
 
@@ -17,7 +18,7 @@ export class Approval extends Component {
     fetch(variables.API_URL + "Requests")
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ request: data });
+        this.setState({ requests: data });
       });
   }
 
@@ -25,8 +26,30 @@ export class Approval extends Component {
     this.refreshList();
   }
 
+  rejectClick(id) {
+    if (window.confirm("Are tou sure?")) {
+      fetch(variables.API_URL + "Requests/" + id, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            alert(result);
+            this.refreshList();
+          },
+          (error) => {
+            alert("Failed");
+          }
+        );
+    }
+  }
+
   render() {
-    const { request } = this.state;
+    const { requests } = this.state;
     return (
       <div>
         <h4>Request management</h4>
@@ -36,13 +59,13 @@ export class Approval extends Component {
             <tr>
               <th>Employee Name</th>
               <th>Remote Percent</th>
-              <th>RequestMsg</th>
+              <th>Request Message</th>
               <th>Approve</th>
               <th>Reject</th>
             </tr>
           </thead>
           <tbody>
-            {request.map((req) => (
+            {requests.map((req) => (
               <tr key={req.EmployeeName}>
                 <td> {req.EmployeeName}</td>
                 <td>{req.RemotePercent + "%"}</td>
@@ -54,7 +77,11 @@ export class Approval extends Component {
                 </td>
 
                 <td>
-                  <button type="button" className="btn btn-danger mr-1">
+                  <button
+                    type="button"
+                    className="btn btn-danger mr-1"
+                    onClick={() => this.rejectClick(req.RequestNo)}
+                  >
                     Reject
                   </button>
                 </td>
