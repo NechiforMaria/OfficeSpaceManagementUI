@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Search } from "../components/Search";
 import { variables } from "../components/Variables";
 
 export class BuildingManagement extends Component {
@@ -7,19 +6,33 @@ export class BuildingManagement extends Component {
     super(props);
 
     this.state = {
-      users: [],
+      buildings: [],
       modalTitle: "",
       BuildingName: "",
       NumberOfFloors: "",
       BuildingAddress: "",
+
+      office: [],
+      OfficeName: "",
+      FloorNo: "",
+      OfficeAdminName: "",
+      TotalDesksCount: "",
+      UsableDesksCount: "",
+      OccupiedDesksCount: "",
     };
   }
 
   refreshList() {
+    fetch(variables.API_URL + "Offices")
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({ office: data });
+      });
+
     fetch(variables.API_URL + "Building")
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ users: data });
+        this.setState({ buildings: data });
       });
   }
 
@@ -48,6 +61,19 @@ export class BuildingManagement extends Component {
     });
   }
 
+  addOfficeClick() {
+    this.setState({
+      modalTitle: "Add new office",
+      OfficeName: "",
+      BuildingName: "",
+      FloorNo: "",
+      OfficeAdminName: "",
+      TotalDesksCount: "",
+      UsableDesksCount: "",
+      OccupiedDesksCount: "",
+    });
+  }
+
   editClick(us) {
     this.setState({
       modalTitle: "Edit building",
@@ -68,6 +94,35 @@ export class BuildingManagement extends Component {
         BuildingName: this.state.BuildingName,
         NumberOfFloors: this.state.NumberOfFloors,
         BuildingAddress: this.state.BuildingAddress,
+      }),
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          alert(result);
+          this.refreshList();
+        },
+        (error) => {
+          alert("Failed");
+        }
+      );
+  }
+
+  createOfficeClick() {
+    fetch(variables.API_URL + "Offices", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        OfficeName: this.state.OfficeName,
+        BuildingName: this.state.BuildingName,
+        FloorNo: this.state.FloorNo,
+        OfficeAdminName: this.state.OfficeAdminName,
+        TotalDesksCount: this.state.TotalDesksCount,
+        UsableDesksCount: this.state.UsableDesksCount,
+        OccupiedDesksCount: this.state.OccupiedDesksCount,
       }),
     })
       .then((res) => res.json())
@@ -130,14 +185,15 @@ export class BuildingManagement extends Component {
   }
 
   render() {
-    const { users, modalTitle, BuildingName, NumberOfFloors, BuildingAddress } =
-      this.state;
+    const {
+      buildings,
+      modalTitle,
+      BuildingName,
+      NumberOfFloors,
+      BuildingAddress,
+    } = this.state;
     return (
       <div>
-        <label className=" m-2">Search a specific building: </label>
-
-        <Search />
-
         <button
           type="button"
           className="btn btn-primary m-2 float-end"
@@ -160,7 +216,7 @@ export class BuildingManagement extends Component {
             </tr>
           </thead>
           <tbody>
-            {users.map((us) => (
+            {buildings.map((us) => (
               <tr key={us.BuildingName}>
                 <td> {us.BuildingName}</td>
                 <td> {us.NumberOfFloors}</td>
@@ -179,6 +235,7 @@ export class BuildingManagement extends Component {
                       fill="currentColor"
                       className="bi bi-file-earmark-plus-fill"
                       viewBox="0 0 16 16"
+                      onClick={() => this.addOfficeClick()}
                     >
                       <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0z" />
                     </svg>

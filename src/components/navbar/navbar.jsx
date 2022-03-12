@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import "./navbar.css";
+import logo from "./Logo.jpg";
 class NavBar extends Component {
   state = {
     persons: [],
@@ -9,9 +11,9 @@ class NavBar extends Component {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <span className="navbar-brand" href="#">
-            No More Bugs
-          </span>
+          <div>
+            <img className="logoo" src={logo} alt="No More Bugs" />
+          </div>
           <button
             className="navbar-toggler"
             type="button"
