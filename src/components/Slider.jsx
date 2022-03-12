@@ -1,4 +1,3 @@
-import { render } from "@testing-library/react";
 import React from "react";
 import "./Slider.css";
 
@@ -18,10 +17,12 @@ export default class Slider extends React.Component {
           max={100}
           step={25}
           value={this.state.value}
-          class="form-range m-2"
+          className="form-range"
           onChange={this.handlerOnChange}
         ></input>
-        <div className="value m-2">{this.state.value}</div>
+        <div id="value" className="value m-2">
+          {this.state.value + "%"}
+        </div>
       </div>
     );
   }
