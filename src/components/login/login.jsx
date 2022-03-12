@@ -1,7 +1,7 @@
 import React from "react";
 import "./login.css";
-import {BsFillPersonFill, BsFillLockFill} from "react-icons/bs";
-import {HiUserGroup} from "react-icons/hi";
+import { BsFillPersonFill, BsFillLockFill } from "react-icons/bs";
+import { HiUserGroup } from "react-icons/hi";
 export class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -28,7 +28,11 @@ export class LoginForm extends React.Component {
     var Username = "user";
     var passUsername = "user";
     event.preventDefault();
-    if (this.state.username === Username && this.state.password === passUsername) alert("Login ok");
+    if (
+      this.state.username === Username &&
+      this.state.password === passUsername
+    )
+      alert("Login ok");
     else {
       alert("Login failed");
     }
@@ -36,28 +40,39 @@ export class LoginForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="bkgImage">
         <label className="navbar navbar-expand-lg navbar-dark bg-dark">
           <span className="navbar-brand"> No More Bugs</span>
-          <hr className="solid" />
+          <hr className="dotted" />
         </label>
         <div className="container">
-          <form id="login-form" onSubmit={this.handleSubmit}>
+          <form className="login-form" onSubmit={this.handleSubmit}>
             <br />
             <i>
-              <HiUserGroup size={40} style={{position: "absolute", top: 100, left: -25}} />
+              <HiUserGroup
+                size={40}
+                style={{
+                  position: "absolute",
+                  top: 100,
+                  left: -25,
+                  marginTop: 60,
+                }}
+              />
             </i>
             <br />
             <br />
             <br />
-            <label className="label accessAccount">Login to access your account</label>
+            <label className="label accessAccount">
+              Login to access
+              <br /> your account
+            </label>
             <br />
             <br />
             <i>
               <BsFillPersonFill size={30} />
             </i>
             <input
-              className="input-field"
+              className="input-fieldUsername"
               type="text"
               id="username"
               placeholder="Username"
@@ -69,7 +84,7 @@ export class LoginForm extends React.Component {
               <BsFillLockFill size={30} />
             </i>
             <input
-              className="input-field"
+              className="input-fieldPassword"
               type="password"
               id="password"
               placeholder="Password"
