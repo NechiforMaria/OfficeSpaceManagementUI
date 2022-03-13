@@ -7,6 +7,7 @@ export class officeStatus extends Component {
 
     this.state = {
       office: [],
+      OfficeID: "",
       OfficeName: "",
       BuildingName: "",
       FloorNo: "",
@@ -20,6 +21,50 @@ export class officeStatus extends Component {
       OfficeNameFilter: "",
       OfficeWithoutFilter: [],
     };
+  }
+
+  editClick(of) {
+    this.setState({
+      modalTitle: "Edit office",
+      OfficeID: of.OfficeID,
+      OfficeName: of.OfficeName,
+      BuildingName: of.BuildingName,
+      FloorNo: of.FloorNo,
+      OfficeAdminName: of.OfficeAdminName,
+      TotalDesksCount: of.TotalDesksCount,
+      UsableDesksCount: of.UsableDesksCount,
+      OccupiedDesksCount: of.OccupiedDesksCount,
+    });
+  }
+
+  updateClick() {
+    fetch(variables.API_URL + "Offices", {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        OfficeID: this.state.OfficeID,
+        OfficeName: this.state.OfficeName,
+        BuildingName: this.state.BuildingName,
+        FloorNo: this.state.FloorNo,
+        OfficeAdminName: this.state.OfficeAdminName,
+        TotalDesksCount: this.state.TotalDesksCount,
+        UsableDesksCount: this.state.UsableDesksCount,
+        OccupiedDesksCount: this.state.OccupiedDesksCount,
+      }),
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          alert(result);
+          this.refreshList();
+        },
+        (error) => {
+          alert("Failed");
+        }
+      );
   }
 
   FilterFn() {
@@ -51,8 +96,68 @@ export class officeStatus extends Component {
     this.refreshList();
   }
 
+  changeBuildingName = (e) => {
+    this.setState({ BuildingName: e.target.value });
+  };
+
+  changeOfficeName = (e) => {
+    this.setState({ OfficeName: e.target.value });
+  };
+
+  changeFloorNo = (e) => {
+    this.setState({ FloorNo: e.target.value });
+  };
+
+  changeOfficeAdminName = (e) => {
+    this.setState({ OfficeAdminName: e.target.value });
+  };
+
+  changeTotalDesksCount = (e) => {
+    this.setState({ TotalDesksCount: e.target.value });
+  };
+
+  changeUsableDesksCount = (e) => {
+    this.setState({ UsableDesksCount: e.target.value });
+  };
+
+  changeOccupiedDesksCount = (e) => {
+    this.setState({ OccupiedDesksCount: e.target.value });
+  };
+
+  deleteClick(id) {
+    if (window.confirm("Are tou sure?")) {
+      fetch(variables.API_URL + "Offices/" + id, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            alert(result);
+            this.refreshList();
+          },
+          (error) => {
+            alert("Failed");
+          }
+        );
+    }
+  }
+
   render() {
-    const { office } = this.state;
+    const {
+      office,
+      modalTitle,
+      BuildingName,
+      OfficeName,
+      FloorNo,
+      OfficeAdminName,
+      TotalDesksCount,
+      UsableDesksCount,
+      OccupiedDesksCount,
+    } = this.state;
     return (
       <div>
         <label className=" m-2">Search a specific office: </label>
@@ -79,6 +184,8 @@ export class officeStatus extends Component {
               <th>Occupied Desks Count</th>
               <th>Free Desks Count</th>
               <th>Occupied percentage</th>
+              <th>Update</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -93,7 +200,7 @@ export class officeStatus extends Component {
                     type="button"
                     className="btn btn-light mr-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
+                    data-bs-target="#exampleModal2"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -119,11 +226,168 @@ export class officeStatus extends Component {
                 <td> {of.UsableDesksCount}</td>
                 <td> {of.OccupiedDesksCount}</td>
                 <td> {of.UsableDesksCount - of.OccupiedDesksCount}</td>
-                <td>{of.OccupiedDesksCount / of.OccupiedDesksCount + "%"}</td>
+                <td>
+                  {(of.OccupiedDesksCount / of.UsableDesksCount).toFixed(2)}%
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    className="btn btn-secondary mr-1"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    onClick={() => this.editClick(of)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-pencil-square"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                      <path
+                        fillRule="evenodd"
+                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                      />
+                    </svg>
+                  </button>
+                </td>
+                <td>
+                  <button type="button" className="btn btn-danger mr-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-x-circle-fill"
+                      viewBox="0 0 16 16"
+                      onClick={() => this.deleteClick(of.OfficeID)}
+                    >
+                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                    </svg>
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+
+        <div
+          className="modal fade"
+          id="exampleModal"
+          tabIndex="-1"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-lg modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">{modalTitle}</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Office Name *</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={OfficeName}
+                    onChange={this.changeOfficeName}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Building Name *</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={BuildingName}
+                    disabled
+                    onChange={this.changeBuildingName}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Floor No *</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={FloorNo}
+                    onChange={this.changeFloorNo}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Office Admin Name</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={OfficeAdminName}
+                    onChange={this.changeOfficeAdminName}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Total Desks Count *</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={TotalDesksCount}
+                    onChange={this.changeTotalDesksCount}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Usable Desks Count *</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={UsableDesksCount}
+                    onChange={this.changeUsableDesksCount}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">
+                    Occupied Desks Count *
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={OccupiedDesksCount}
+                    onChange={this.changeOccupiedDesksCount}
+                  />
+                </div>
+              </div>
+
+              <button
+                type="button"
+                className="btn btn-primary float-start"
+                onClick={() => this.updateClick()}
+              >
+                Update office
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
