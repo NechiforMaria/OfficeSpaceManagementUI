@@ -1,7 +1,9 @@
 import React from "react";
 import "./login.css";
-import { BsFillPersonFill, BsFillLockFill } from "react-icons/bs";
-import { HiUserGroup } from "react-icons/hi";
+import {BsFillPersonFill, BsFillLockFill} from "react-icons/bs";
+import {HiUserGroup} from "react-icons/hi";
+import logo from "./Logo.jpg";
+
 export class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -28,11 +30,7 @@ export class LoginForm extends React.Component {
     var Username = "user";
     var passUsername = "user";
     event.preventDefault();
-    if (
-      this.state.username === Username &&
-      this.state.password === passUsername
-    )
-      alert("Login ok");
+    if (this.state.username === Username && this.state.password === passUsername) alert("Login ok");
     else {
       alert("Login failed");
     }
@@ -41,8 +39,10 @@ export class LoginForm extends React.Component {
   render() {
     return (
       <div className="bkgImage">
-        <label className="navbar navbar-expand-lg navbar-dark bg-dark">
-          <span className="navbar-brand"> No More Bugs</span>
+        <label className="navbar navbar-expand-lg navbar-dark bg-dark loginNav">
+          <span className="navbar-brand">
+            <img className="logLogin" src={logo} alt="No More Bugs" />
+          </span>
           <hr className="dotted" />
         </label>
         <div className="container">
