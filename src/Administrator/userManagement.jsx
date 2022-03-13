@@ -295,14 +295,14 @@ export class UserManagement extends Component {
             <tr>
               <th>First Name</th>
               <th>Last Name</th>
-              <th>Email address</th>
+              <th>Email Address</th>
               <th>Password</th>
               <th>Role</th>
               <th>Gender</th>
-              <th>Birth date</th>
+              <th>Birth Date</th>
               <th>Nationality</th>
               <th>Building Name</th>
-              <th>Work remote</th>
+              <th>Work Remote</th>
               <th>Update</th>
               <th>Activated</th>
               <th>Deactiveted</th>
