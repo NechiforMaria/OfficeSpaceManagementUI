@@ -1,6 +1,6 @@
+import moment from "moment";
 import React, { Component } from "react";
 import { variables } from "../components/Variables";
-import moment from "moment";
 
 export class UserManagement extends Component {
   constructor(props) {
@@ -229,6 +229,26 @@ export class UserManagement extends Component {
       );
   }
 
+  statusUpdateClick(EmpStatus, ID) {
+    fetch(variables.API_URL + "Employees/" + EmpStatus + "," + ID, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          alert(result);
+          this.refreshList();
+        },
+        (error) => {
+          alert("Failed");
+        }
+      );
+  }
+
   render() {
     const {
       users,
@@ -248,10 +268,10 @@ export class UserManagement extends Component {
       BuildingName,
       WorkRemote,
     } = this.state;
+
     return (
       <div>
         <label className=" m-2">Search a specific user: </label>
-
         <span className="Icon-inside">
           <input
             className="input-field mb-3"
@@ -261,7 +281,6 @@ export class UserManagement extends Component {
             onChange={this.changeUsersNameFilter}
           />
         </span>
-
         <button
           type="button"
           className="btn btn-primary m-2 float-end"
@@ -271,7 +290,6 @@ export class UserManagement extends Component {
         >
           Add User
         </button>
-
         <table className="table table-striped">
           <thead>
             <tr>
@@ -299,14 +317,14 @@ export class UserManagement extends Component {
                 <td> {us.Passw}</td>
                 <td> {us.EmpRole}</td>
                 <td> {us.Gender}</td>
-                <td> {us.BirthDate}</td>
+                <td> {moment(us.BirthDate).format("DD MMMM YYYY")}</td>
                 <td> {us.Nationality}</td>
                 <td> {us.BuildingName}</td>
                 <td> {us.WorkRemote}</td>
                 <td>
                   <button
                     type="button"
-                    className="btn btn-light mr-1"
+                    className="btn btn-secondary"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
                     onClick={() => this.editClick(us)}
@@ -327,9 +345,18 @@ export class UserManagement extends Component {
                     </svg>
                   </button>
                 </td>
-
                 <td>
-                  <button type="button" className="btn btn-light mr-1">
+                  <button
+                    style={
+                      us.EmpStatus === "active"
+                        ? { opacity: 1 }
+                        : { opacity: 0.5 }
+                    }
+                    type="button"
+                    className="btn btn-success mr-1"
+                    id="active-status"
+                    onClick={() => this.statusUpdateClick("active", us.ID)}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -344,7 +371,17 @@ export class UserManagement extends Component {
                 </td>
 
                 <td>
-                  <button type="button" className="btn btn-light mr-1">
+                  <button
+                    style={
+                      us.EmpStatus !== "active"
+                        ? { opacity: 1 }
+                        : { opacity: 0.5 }
+                    }
+                    type="button"
+                    className="btn btn-danger mr-1"
+                    id="inactive-status"
+                    onClick={() => this.statusUpdateClick("inactive", us.ID)}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -361,7 +398,6 @@ export class UserManagement extends Component {
             ))}
           </tbody>
         </table>
-
         <div
           className="modal fade"
           id="exampleModal"
