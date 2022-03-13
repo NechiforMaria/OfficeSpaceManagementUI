@@ -23,12 +23,6 @@ export class BuildingManagement extends Component {
   }
 
   refreshList() {
-    fetch(variables.API_URL + "Offices")
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ office: data });
-      });
-
     fetch(variables.API_URL + "Building")
       .then((response) => response.json())
       .then((data) => {
@@ -52,6 +46,30 @@ export class BuildingManagement extends Component {
     this.setState({ BuildingAddress: e.target.value });
   };
 
+  changeOfficeName = (e) => {
+    this.setState({ OfficeName: e.target.value });
+  };
+
+  changeFloorNo = (e) => {
+    this.setState({ FloorNo: e.target.value });
+  };
+
+  changeOfficeAdminName = (e) => {
+    this.setState({ OfficeAdminName: e.target.value });
+  };
+
+  changeTotalDesksCount = (e) => {
+    this.setState({ TotalDesksCount: e.target.value });
+  };
+
+  changeUsableDesksCount = (e) => {
+    this.setState({ UsableDesksCount: e.target.value });
+  };
+
+  changeOccupiedDesksCount = (e) => {
+    this.setState({ OccupiedDesksCount: e.target.value });
+  };
+
   addClick() {
     this.setState({
       modalTitle: "Add new building",
@@ -61,11 +79,11 @@ export class BuildingManagement extends Component {
     });
   }
 
-  addOfficeClick() {
+  addOfficeClick(us) {
     this.setState({
       modalTitle: "Add new office",
       OfficeName: "",
-      BuildingName: "",
+      BuildingName: us.BuildingName,
       FloorNo: "",
       OfficeAdminName: "",
       TotalDesksCount: "",
@@ -191,6 +209,12 @@ export class BuildingManagement extends Component {
       BuildingName,
       NumberOfFloors,
       BuildingAddress,
+      OfficeName,
+      FloorNo,
+      OfficeAdminName,
+      TotalDesksCount,
+      UsableDesksCount,
+      OccupiedDesksCount,
     } = this.state;
     return (
       <div>
@@ -224,9 +248,9 @@ export class BuildingManagement extends Component {
                 <td>
                   <button
                     type="button"
-                    className="btn btn-light mr-1"
+                    className="btn btn-success mr-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
+                    data-bs-target="#exampleModal2"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -235,7 +259,7 @@ export class BuildingManagement extends Component {
                       fill="currentColor"
                       className="bi bi-file-earmark-plus-fill"
                       viewBox="0 0 16 16"
-                      onClick={() => this.addOfficeClick()}
+                      onClick={() => this.addOfficeClick(us)}
                     >
                       <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0z" />
                     </svg>
@@ -245,7 +269,7 @@ export class BuildingManagement extends Component {
                 <td>
                   <button
                     type="button"
-                    className="btn btn-light mr-1"
+                    className="btn btn-secondary"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
                     onClick={() => this.editClick(us)}
@@ -268,7 +292,7 @@ export class BuildingManagement extends Component {
                 </td>
 
                 <td>
-                  <button type="button" className="btn btn-light mr-1">
+                  <button type="button" className="btn btn-danger mr-1">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -360,6 +384,122 @@ export class BuildingManagement extends Component {
                   Edit
                 </button>
               ) : null}
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="modal fade"
+          id="exampleModal2"
+          tabIndex="-1"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-lg modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">{modalTitle}</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Office Name *</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={OfficeName}
+                    onChange={this.changeOfficeName}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Building Name *</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={BuildingName}
+                    disabled
+                    onChange={this.changeBuildingName}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Floor No *</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={FloorNo}
+                    onChange={this.changeFloorNo}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Office Admin Name </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={OfficeAdminName}
+                    onChange={this.changeOfficeAdminName}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Total Desks Count *</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={TotalDesksCount}
+                    onChange={this.changeTotalDesksCount}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Usable Desks Count *</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={UsableDesksCount}
+                    onChange={this.changeUsableDesksCount}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">
+                    Occupied Desks Count *
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={OccupiedDesksCount}
+                    onChange={this.changeOccupiedDesksCount}
+                  />
+                </div>
+              </div>
+
+              <button
+                type="button"
+                className="btn btn-primary float-start"
+                onClick={() => this.createOfficeClick()}
+              >
+                Create office
+              </button>
             </div>
           </div>
         </div>
