@@ -45,7 +45,7 @@ export class LoginForm extends React.Component {
           </span>
           <hr className="dotted" />
         </label>
-        <div className="container">
+        <div className="containerLogin">
           <form className="login-form" onSubmit={this.handleSubmit}>
             <br />
             <i>
