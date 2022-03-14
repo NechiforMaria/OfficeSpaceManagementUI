@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import React, {Component} from "react";
+import {NavLink} from "react-router-dom";
 import "./navbar.css";
-import logo from "./Logo.jpg";
+import logo from "./logo_transparent.png";
 class NavBar extends Component {
   state = {
     persons: [],
@@ -102,7 +102,7 @@ class NavBar extends Component {
 export default NavBar;
 
 const mystyle = {
-  backgroundColor: "black",
+  backgroundColor: "#343A40",
 };
 
 const mystyledreapta = {

@@ -1,6 +1,7 @@
 import React from "react";
-import logo from "./Logo.jpg";
+import logo from "./logo_transparent.png";
 import {NavLink} from "react-router-dom";
+import "./navbar.css";
 
 class UserNavBar extends React.Component {
   render() {
@@ -13,11 +14,7 @@ class UserNavBar extends React.Component {
             </div>
           </div>
           <div style={mystyleflex} className="justify-content-end">
-            <div
-              style={mystyledreapta}
-              className="collapse navbar-collapse "
-              id="navbarNavDropdown"
-            >
+            <div className="collapse navbar-collapse " id="navbarNavDropdown">
               <ul className="navbar-nav ">
                 <li className="nav-item dropdown me-2 ">
                   <span
@@ -32,7 +29,7 @@ class UserNavBar extends React.Component {
                   </span>
                   <ul
                     className="dropdown-menu"
-                    style={{backgroundColor: "black"}}
+                    style={{backgroundColor: "#343a40"}}
                     aria-labelledby="navbarDropdownMenuLink"
                   >
                     <li className="dropdown-item color: black">
