@@ -2,12 +2,3 @@
   width: 12px;
   height: 20px;
 }
-.table,
-td,
-tr,
-th,
-tbody,
-thead {
-  margin: 0 auto;
-  text-align: center;
-}
