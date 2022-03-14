@@ -1,11 +1,11 @@
 .Logo {
-  background-image: url(./logo_transparent.png);
+  background-image: url(./Logo.jpg);
 }
 
 .logoo {
   border-radius: 8px;
   width: 100%;
-  height: 110px;
+  height: 60px;
 }
 .navbar {
   margin-bottom: 10px;
