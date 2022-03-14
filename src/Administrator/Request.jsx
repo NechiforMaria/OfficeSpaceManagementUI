@@ -34,7 +34,7 @@ export class Request extends Component {
         EmployeeName: this.state.EmployeeName,
         RemotePercent: this.state.value,
         RequestMsg: String(this.state.textArea),
-        ReqStatus: this.state.ReqStatus,
+        ReqStatus: "Pending",
       }),
     })
       .then((res) => res.json())
