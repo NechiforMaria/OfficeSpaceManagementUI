@@ -75,7 +75,13 @@ class NavBar extends Component {
 
                 <li className="nav-item me-2">
                   <NavLink className="nav-link" to="/Request">
-                    Request
+                    Make a Request
+                  </NavLink>
+                </li>
+
+                <li className="nav-item me-2">
+                  <NavLink className="nav-link" to="/MyRequest">
+                    My Request
                   </NavLink>
                 </li>
 
