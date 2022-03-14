@@ -1,7 +1,7 @@
 import moment from "moment";
-import React, { Component } from "react";
-import { variables } from "../components/Variables";
-
+import React, {Component} from "react";
+import {variables} from "../components/Variables";
+import "./userManagement.css";
 export class UserManagement extends Component {
   constructor(props) {
     super(props);
@@ -34,19 +34,17 @@ export class UserManagement extends Component {
     var UsersNameFilter = this.state.UsersNameFilter;
 
     var filteredData = this.state.UsersWithoutFilter.filter(function (el) {
-      return String(el.FirstName)
-        .toLowerCase()
-        .includes(UsersNameFilter.trim().toLowerCase());
+      return String(el.FirstName).toLowerCase().includes(UsersNameFilter.trim().toLowerCase());
     });
 
-    this.setState({ users: filteredData });
+    this.setState({users: filteredData});
   }
 
   refreshList() {
     fetch(variables.API_URL + "Employees")
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ users: data, UsersWithoutFilter: data });
+        this.setState({users: data, UsersWithoutFilter: data});
       });
   }
 
@@ -60,59 +58,59 @@ export class UserManagement extends Component {
   }
 
   changeFirstName = (e) => {
-    this.setState({ FirstName: e.target.value });
+    this.setState({FirstName: e.target.value});
   };
 
   changeLastName = (e) => {
-    this.setState({ LastName: e.target.value });
+    this.setState({LastName: e.target.value});
   };
 
   changeEmail = (e) => {
-    this.setState({ Email: e.target.value });
+    this.setState({Email: e.target.value});
   };
 
   changePassw = (e) => {
-    this.setState({ Passw: e.target.value });
+    this.setState({Passw: e.target.value});
   };
 
   changeRole = (e) => {
-    this.setState({ EmpRole: e.target.value });
+    this.setState({EmpRole: e.target.value});
   };
 
   changeGender = (e) => {
-    this.setState({ Gender: e.target.value });
+    this.setState({Gender: e.target.value});
   };
 
   changeBirthDate = (e) => {
-    this.setState({ BirthDate: e.target.value });
+    this.setState({BirthDate: e.target.value});
   };
 
   changeNationality = (e) => {
-    this.setState({ Nationality: e.target.value });
+    this.setState({Nationality: e.target.value});
   };
 
   changeEmpStatus = (e) => {
-    this.setState({ EmpStatus: e.target.value });
+    this.setState({EmpStatus: e.target.value});
   };
 
   changeDeskNo = (e) => {
-    this.setState({ DeskNo: e.target.value });
+    this.setState({DeskNo: e.target.value});
   };
 
   changeOfficeName = (e) => {
-    this.setState({ OfficeName: e.target.value });
+    this.setState({OfficeName: e.target.value});
   };
 
   changeFloorNo = (e) => {
-    this.setState({ FloorNo: e.target.value });
+    this.setState({FloorNo: e.target.value});
   };
 
   changeBuildingName = (e) => {
-    this.setState({ BuildingName: e.target.value });
+    this.setState({BuildingName: e.target.value});
   };
 
   changeWorkRemote = (e) => {
-    this.setState({ WorkRemote: e.target.value });
+    this.setState({WorkRemote: e.target.value});
   };
 
   addClick() {
@@ -305,7 +303,7 @@ export class UserManagement extends Component {
               <th>Work Remote</th>
               <th>Update</th>
               <th>Activated</th>
-              <th>Deactiveted</th>
+              <th>Deactivated</th>
             </tr>
           </thead>
           <tbody>
@@ -347,11 +345,7 @@ export class UserManagement extends Component {
                 </td>
                 <td>
                   <button
-                    style={
-                      us.EmpStatus === "active"
-                        ? { opacity: 1 }
-                        : { opacity: 0.5 }
-                    }
+                    style={us.EmpStatus === "active" ? {opacity: 1} : {opacity: 0.5}}
                     type="button"
                     className="btn btn-success mr-1"
                     id="active-status"
@@ -372,11 +366,7 @@ export class UserManagement extends Component {
 
                 <td>
                   <button
-                    style={
-                      us.EmpStatus !== "active"
-                        ? { opacity: 1 }
-                        : { opacity: 0.5 }
-                    }
+                    style={us.EmpStatus !== "active" ? {opacity: 1} : {opacity: 0.5}}
                     type="button"
                     className="btn btn-danger mr-1"
                     id="inactive-status"
@@ -398,12 +388,7 @@ export class UserManagement extends Component {
             ))}
           </tbody>
         </table>
-        <div
-          className="modal fade"
-          id="exampleModal"
-          tabIndex="-1"
-          aria-hidden="true"
-        >
+        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-hidden="true">
           <div className="modal-dialog modal-lg modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
