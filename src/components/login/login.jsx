@@ -2,7 +2,7 @@ import React from "react";
 import "./login.css";
 import {BsFillPersonFill, BsFillLockFill} from "react-icons/bs";
 import {HiUserGroup} from "react-icons/hi";
-import logo from "./Logo.jpg";
+import logo from "./logo_transparent.png";
 
 export class LoginForm extends React.Component {
   constructor(props) {
@@ -34,6 +34,8 @@ export class LoginForm extends React.Component {
     else {
       alert("Login failed");
     }
+    this.username.value = "";
+    this.password.value = "";
   }
 
   render() {
