@@ -6,15 +6,16 @@ import { officeStatus } from "./Administrator/officeStatus";
 import { Approval } from "./Administrator/Approval";
 import { DeskAssignment } from "./Administrator/DeskAssignment";
 import { BuildingManagement } from "./Administrator/buildingManagement";
+import { MyRequest } from "./Administrator/MyRequest";
 import { Request } from "./Administrator/Request";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
 import LoginForm from "./components/Login/login";
 
 class App extends Component {
   render() {
     return (
       <React.Fragment>
+        {/* <LoginForm />*/}
         <Router>
           <NavBar />
           <Switch>
@@ -22,6 +23,7 @@ class App extends Component {
               <Approval />
             </Route>
             <Route path="/Request" component={Request} />
+            <Route path="/MyRequest" component={MyRequest} />
             <Route path="/Approval" component={Approval} />
             <Route path="/DeskAssignment" component={DeskAssignment} />
             <Route path="/userManagement" component={UserManagement} />
