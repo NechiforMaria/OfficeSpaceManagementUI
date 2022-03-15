@@ -79,9 +79,9 @@ export class Request extends Component {
         <label className=" m-2">Legend:</label>
         <br></br>
         <label className=" m-2">0%-no remote</label>
-        <label className=" m-2">25%-one week remote</label>
-        <label className=" m-2">50%-two week remote</label>
-        <label className=" m-2">75%-tree week remote</label>
+        <label className=" m-2">25%-one weeks remote</label>
+        <label className=" m-2">50%-two weeks remote</label>
+        <label className=" m-2">75%-tree weeks remote</label>
         <label className=" m-2">100%-fully remote</label>
         <div>
           <label className="Reason m-2">
