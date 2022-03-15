@@ -16,6 +16,9 @@
   width: 100%;
   height: 60px;
 }
+.navbar-brand {
+  padding-right: 95%;
+}
 .input-fieldUsername,
 input.input-fieldPassword {
   background-color: rgb(245, 245, 220, 0.75);

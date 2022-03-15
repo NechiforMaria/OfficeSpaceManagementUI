@@ -2,7 +2,7 @@ import React from "react";
 import "./login.css";
 import {BsFillPersonFill, BsFillLockFill} from "react-icons/bs";
 import {HiUserGroup} from "react-icons/hi";
-import logo from "./logo_transparent.png";
+import logo from "./Logo.jpg";
 
 export class LoginForm extends React.Component {
   constructor(props) {
@@ -43,7 +43,7 @@ export class LoginForm extends React.Component {
       <div className="bkgImage">
         <label className="navbar navbar-expand-lg navbar-dark bg-dark loginNav">
           <span className="navbar-brand">
-            <img className="logLogin" src={logo} alt="No More Bugs" />
+            <img className=" logLogin" src={logo} alt="No More Bugs" style={{float: "left"}} />
           </span>
           <hr className="dotted" />
         </label>
