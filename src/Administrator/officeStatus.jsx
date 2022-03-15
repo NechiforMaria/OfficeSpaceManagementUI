@@ -18,6 +18,11 @@ export class officeStatus extends Component {
       FreeDesksCount: "",
       Occupiedpercentage: "",
 
+      employees: [],
+      FirstName: "",
+      LastName: "",
+      DeskNo: "",
+
       OfficeNameFilter: "",
       OfficeWithoutFilter: [],
     };
@@ -146,9 +151,18 @@ export class officeStatus extends Component {
     }
   }
 
+  employeesClick(OfficeName) {
+    fetch(variables.API_URL + "Offices/" + OfficeName)
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({ employees: data });
+      });
+  }
+
   render() {
     const {
       office,
+      employees,
       modalTitle,
       BuildingName,
       OfficeName,
@@ -209,6 +223,7 @@ export class officeStatus extends Component {
                       fill="currentColor"
                       className="bi bi-list-task"
                       viewBox="0 0 16 16"
+                      onClick={() => this.employeesClick(of.OfficeName)}
                     >
                       <path
                         fillRule="evenodd"
@@ -385,6 +400,62 @@ export class officeStatus extends Component {
               >
                 Update office
               </button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="modal fade"
+          id="exampleModal2"
+          tabIndex="-1"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-lg modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">{modalTitle}</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Office Name *</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={OfficeName}
+                    onChange={this.changeOfficeName}
+                  />
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <table className="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Desk No</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {employees.map((emp) => (
+                        <tr key={emp.FirstName}>
+                          <td>{emp.FirstName}</td>
+                          <td>{emp.LastName}</td>
+                          <td>{emp.DeskNo}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
