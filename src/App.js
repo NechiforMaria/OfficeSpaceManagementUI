@@ -1,23 +1,25 @@
 import React, { Component } from "react";
-import NavBar from "./components/navbar/navbar";
+import NavBarAdministrator from "./components/navbar/navbarAdministrator";
+//import NavBarEmployees from "./components/navbar/navbarEmployees";
 import "./App.css";
-import { UserManagement } from "./Administrator/userManagement";
+import { UserManagement } from "./Administrator/userManagement/userManagement";
 import { officeStatus } from "./Administrator/officeStatus";
 import { Approval } from "./Administrator/Approval";
 import { DeskAssignment } from "./Administrator/DeskAssignment";
 import { BuildingManagement } from "./Administrator/buildingManagement";
 import { MyRequest } from "./Administrator/MyRequest";
 import { Request } from "./Administrator/Request";
+import { Footer } from "./components/Footer/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import LoginForm from "./components/Login/login";
+///import LoginForm from "./components/Login/login";
 
 class App extends Component {
   render() {
     return (
       <React.Fragment>
-        {/* <LoginForm />*/}
+        {/*<LoginForm />*/}
         <Router>
-          <NavBar />
+          <NavBarAdministrator />
           <Switch>
             <Route path="/Approval">
               <Approval />
@@ -31,6 +33,7 @@ class App extends Component {
             <Route path="/buildingManagement" component={BuildingManagement} />
           </Switch>
         </Router>
+        <Footer />
       </React.Fragment>
     );
   }
