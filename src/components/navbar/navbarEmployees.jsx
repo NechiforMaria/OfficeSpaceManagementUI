@@ -49,13 +49,13 @@ class NavBarEmployees extends Component {
                     aria-labelledby="navbarDropdownMenuLink"
                   >
                     <li className="dropdown-item color: black">
-                      <NavLink className="nav-link" to="/officeStatus">
-                        Office Status
+                      <NavLink className="nav-link" to="/UserStatus">
+                        User status
                       </NavLink>
                     </li>
                     <li className="dropdown-item color: black">
-                      <NavLink className="nav-link" to="/">
-                        User status
+                      <NavLink className="nav-link" to="/officeStatus">
+                        Office Status
                       </NavLink>
                     </li>
                   </ul>
