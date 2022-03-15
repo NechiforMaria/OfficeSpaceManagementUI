@@ -8,8 +8,9 @@ export class BuildingManagement extends Component {
     this.state = {
       buildings: [],
       modalTitle: "",
+      BuildingID: "",
       BuildingName: "",
-      NumberOfFloors: "",
+      FloorsNo: "",
       BuildingAddress: "",
 
       office: [],
@@ -23,7 +24,7 @@ export class BuildingManagement extends Component {
   }
 
   refreshList() {
-    fetch(variables.API_URL + "Building")
+    fetch(variables.API_URL + "Buildings")
       .then((response) => response.json())
       .then((data) => {
         this.setState({ buildings: data });
@@ -38,8 +39,8 @@ export class BuildingManagement extends Component {
     this.setState({ BuildingName: e.target.value });
   };
 
-  changeNumberOfFloors = (e) => {
-    this.setState({ NumberOfFloors: e.target.value });
+  changeFloorsNo = (e) => {
+    this.setState({ FloorsNo: e.target.value });
   };
 
   changeBuildingAddress = (e) => {
@@ -74,7 +75,7 @@ export class BuildingManagement extends Component {
     this.setState({
       modalTitle: "Add new building",
       BuildingName: "",
-      NumberOfFloors: "",
+      FloorsNo: "",
       BuildingAddress: "",
     });
   }
@@ -92,17 +93,8 @@ export class BuildingManagement extends Component {
     });
   }
 
-  editClick(us) {
-    this.setState({
-      modalTitle: "Edit building",
-      BuildingName: us.BuildingName,
-      NumberOfFloors: us.NumberOfFloors,
-      BuildingAddress: us.BuildingAddress,
-    });
-  }
-
   createClick() {
-    fetch(variables.API_URL + "Building", {
+    fetch(variables.API_URL + "Buildings", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -110,7 +102,7 @@ export class BuildingManagement extends Component {
       },
       body: JSON.stringify({
         BuildingName: this.state.BuildingName,
-        NumberOfFloors: this.state.NumberOfFloors,
+        FloorsNo: this.state.FloorsNo,
         BuildingAddress: this.state.BuildingAddress,
       }),
     })
@@ -155,16 +147,27 @@ export class BuildingManagement extends Component {
       );
   }
 
+  editClick(us) {
+    this.setState({
+      modalTitle: "Edit building",
+      BuildingID: us.BuildingID,
+      BuildingName: us.BuildingName,
+      FloorsNo: us.FloorsNo,
+      BuildingAddress: us.BuildingAddress,
+    });
+  }
+
   updateClick() {
-    fetch(variables.API_URL + "Building", {
+    fetch(variables.API_URL + "Buildings", {
       method: "PUT",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        BuildingID: this.state.BuildingID,
         BuildingName: this.state.BuildingName,
-        NumberOfFloors: this.state.NumberOfFloors,
+        FloorsNo: this.state.FloorsNo,
         BuildingAddress: this.state.BuildingAddress,
       }),
     })
@@ -180,9 +183,9 @@ export class BuildingManagement extends Component {
       );
   }
 
-  deleteClick(BuildingName) {
+  deleteClick(BuildingID) {
     if (window.confirm("Are tou sure?")) {
-      fetch(variables.API_URL + "Building/" + BuildingName, {
+      fetch(variables.API_URL + "Buildings/" + BuildingID, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
@@ -207,7 +210,7 @@ export class BuildingManagement extends Component {
       buildings,
       modalTitle,
       BuildingName,
-      NumberOfFloors,
+      FloorsNo,
       BuildingAddress,
       OfficeName,
       FloorNo,
@@ -243,7 +246,7 @@ export class BuildingManagement extends Component {
             {buildings.map((us) => (
               <tr key={us.BuildingName}>
                 <td> {us.BuildingName}</td>
-                <td> {us.NumberOfFloors}</td>
+                <td> {us.FloorsNo}</td>
                 <td> {us.BuildingAddress}</td>
                 <td>
                   <button
@@ -300,7 +303,7 @@ export class BuildingManagement extends Component {
                       fill="currentColor"
                       className="bi bi-x-circle-fill"
                       viewBox="0 0 16 16"
-                      onClick={() => this.deleteClick(us.BuildingName)}
+                      onClick={() => this.deleteClick(us.BuildingID)}
                     >
                       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
                     </svg>
@@ -347,8 +350,8 @@ export class BuildingManagement extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    value={NumberOfFloors}
-                    onChange={this.changeNumberOfFloors}
+                    value={FloorsNo}
+                    onChange={this.changeFloorsNo}
                   />
                 </div>
               </div>
