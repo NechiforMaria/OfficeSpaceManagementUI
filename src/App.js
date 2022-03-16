@@ -17,18 +17,22 @@ import { Request } from "./Administrator/Request";
 import { Footer } from "./components/Footer/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 ///import LoginForm from "./components/Login/login";
+import Login from "./components/login/login";
 
 class App extends Component {
   render() {
     return (
       <React.Fragment>
-        {/*<LoginForm />*/}
+        
         <Router>
           <NavBarAdministrator />
+          <Login/>
           <Switch>
             <Route path="/Approval">
               <Approval />
             </Route>
+           
+            
             <Route path="/Request" component={Request} />
             <Route path="/MyRequest" component={MyRequest} />
             <Route path="/Approval" component={Approval} />

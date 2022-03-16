@@ -1,54 +1,58 @@
-import React from "react";
+import React, { SyntheticEvent, useState } from "react";
 import "./login.css";
 import {BsFillPersonFill, BsFillLockFill} from "react-icons/bs";
 import {HiUserGroup} from "react-icons/hi";
 import logo from "./Logo.jpg";
+import { Redirect } from "react-router-dom";
+import { UserManagement } from "../../Administrator/userManagement/userManagement";
+import { variables } from "../Variables";
 
-export class LoginForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      username: "",
-      password: "",
-    };
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handleUsernameChange(event) {
-    this.setState({
-      username: event.target.value,
-    });
-  }
-  handlePasswordChange(event) {
-    this.setState({
-      password: event.target.value,
-    });
-  }
-  handleSubmit(event) {
-    var Username = "user";
-    var passUsername = "user";
-    event.preventDefault();
-    if (this.state.username === Username && this.state.password === passUsername) alert("Login ok");
-    else {
-      alert("Login failed");
+const Login = () => {
+  //render() {
+    const[email, setEmail] = useState('');
+    const[password, setPassword] = useState('');
+    const[redirect, setRedirect] = useState(false);
+    const[user, setUser] = useState(null);
+    
+    const submit = async (e) => {
+        e.preventDefault();
+      
+        await fetch(variables.API_URL + 'users/authenticate',{
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+            },
+          // credentials: 'include',
+          body: JSON.stringify({
+            email,
+            password
+          })
+          
+        })
+        .then((response) => response.json())
+        .then((data) => {setUser(data)})
+        setRedirect(true);
     }
-    this.username.value = "";
-    this.password.value = "";
-  }
+    if(redirect && user === "Administrator"){
+      //setRedirect(false);
+     // setUser(null);
+      return <Redirect to="/userManagement"  component={UserManagement}/>
+    }
+    else
+    {
 
-  render() {
+    }
     return (
       <div className="bkgImage">
-        <label className="navbar navbar-expand-lg navbar-dark bg-dark loginNav">
+        {/* <label className="navbar navbar-expand-lg navbar-dark bg-dark loginNav">
           <span className="navbar-brand">
             <img className=" logLogin" src={logo} alt="No More Bugs" style={{float: "left"}} />
           </span>
           <hr className="dotted" />
-        </label>
+        </label> */}
         <div className="containerLogin">
-          <form className="login-form" onSubmit={this.handleSubmit}>
+          <form className="login-form" onSubmit={submit}>
             <br />
             <i>
               <HiUserGroup
@@ -74,11 +78,11 @@ export class LoginForm extends React.Component {
               <BsFillPersonFill size={30} />
             </i>
             <input
-              className="input-fieldUsername"
+              className="input-fieldEmail"
               type="text"
-              id="username"
-              placeholder="Username"
-              onChange={this.handleUsernameChange}
+              placeholder="Email"
+              onChange={e => setEmail(e.target.value)}
+              required
             />
 
             <br />
@@ -88,9 +92,9 @@ export class LoginForm extends React.Component {
             <input
               className="input-fieldPassword"
               type="password"
-              id="password"
               placeholder="Password"
-              onChange={this.handlePasswordChange}
+              onChange={e => setPassword(e.target.value)}
+              required
             />
             <br />
             <input className="checkbox" type="checkbox" />
@@ -99,22 +103,21 @@ export class LoginForm extends React.Component {
               Remember Me
             </label>
             <br />
-            <input
+            <button
               type="submit"
-              className="btnLI"
+              className="btn btnLI "
               id="login-form-submit"
-              value="Login"
-              onClick={this.handleSubmit}
-            />
+             
+            >Login</button>
             <br />
           </form>
         </div>
       </div>
     );
   }
-}
-LoginForm.defaultProps = {
-  Username: "",
-  Password: "",
-};
-export default LoginForm;
+
+// Login.defaultProps = {
+//   email: "",
+//   Password: "",
+// };
+export default Login;
