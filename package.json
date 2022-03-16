@@ -32,12 +32,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -51,7 +45,6 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/react-hooks": "^7.0.2",
-    "html-webpack-plugin": "^5.5.0"
+    "@testing-library/react-hooks": "^7.0.2"
   }
 }
