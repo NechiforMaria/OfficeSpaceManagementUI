@@ -28,20 +28,6 @@ export class officeStatus extends Component {
     };
   }
 
-  editClick(of) {
-    this.setState({
-      modalTitle: "Edit office",
-      OfficeID: of.OfficeID,
-      OfficeName: of.OfficeName,
-      BuildingName: of.BuildingName,
-      FloorNo: of.FloorNo,
-      OfficeAdminName: of.OfficeAdminName,
-      TotalDesksCount: of.TotalDesksCount,
-      UsableDesksCount: of.UsableDesksCount,
-      OccupiedDesksCount: of.OccupiedDesksCount,
-    });
-  }
-
   updateClick() {
     fetch(variables.API_URL + "Offices", {
       method: "PUT",
@@ -151,11 +137,33 @@ export class officeStatus extends Component {
     }
   }
 
-  employeesClick(OfficeName) {
-    fetch(variables.API_URL + "Offices/" + OfficeName)
+  editClick(of) {
+    this.setState({
+      modalTitle: "Edit office",
+      OfficeID: of.OfficeID,
+      OfficeName: of.OfficeName,
+      BuildingName: of.BuildingName,
+      FloorNo: of.FloorNo,
+      OfficeAdminName: of.OfficeAdminName,
+      TotalDesksCount: of.TotalDesksCount,
+      UsableDesksCount: of.UsableDesksCount,
+      OccupiedDesksCount: of.OccupiedDesksCount,
+    });
+  }
+
+  employeesClick(OfficeeName) {
+    this.setState({
+      modalTitle: "Employees",
+      OfficeName: this.state.OfficeName,
+    });
+    fetch(variables.API_URL + "Offices/" + OfficeeName)
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ employees: data });
+        this.setState({
+          employees: data,
+          modalTitle: "Employees",
+          OfficeName: OfficeeName,
+        });
       });
   }
 

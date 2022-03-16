@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import NavBarAdministrator from "./components/navbar/navbarAdministrator";
 //import NavBarEmployees from "./components/navbar/navbarEmployees";
 import "./App.css";
+import { UserStatus } from "./User/userStatus";
+
 import { UserManagement } from "./Administrator/userManagement/userManagement";
 import { officeStatus } from "./Administrator/officeStatus";
+import { officeStatusOfficeAdministrator } from "./OfficeAdministrator/officeStatusOfAdministrator";
+import { officeStatusEmployee } from "./Employee/officeStatusEmployee";
+
 import { Approval } from "./Administrator/Approval";
 import { DeskAssignment } from "./Administrator/DeskAssignment";
 import { BuildingManagement } from "./Administrator/buildingManagement";
@@ -29,6 +34,16 @@ class App extends Component {
             <Route path="/Approval" component={Approval} />
             <Route path="/DeskAssignment" component={DeskAssignment} />
             <Route path="/userManagement" component={UserManagement} />
+            <Route path="/userStatus" component={UserStatus} />
+            <Route
+              path="/officeStatusOfAdministrator"
+              component={officeStatusOfficeAdministrator}
+            />
+            <Route
+              path="/officeStatusEmployee"
+              component={officeStatusEmployee}
+            />
+
             <Route path="/officeStatus" component={officeStatus} />
             <Route path="/buildingManagement" component={BuildingManagement} />
           </Switch>
