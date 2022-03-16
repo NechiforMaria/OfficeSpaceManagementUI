@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { variables } from "../components/Variables";
+import Chart from "react-apexcharts";
 
 export class officeStatus extends Component {
   constructor(props) {
@@ -17,7 +18,10 @@ export class officeStatus extends Component {
       OccupiedDesksCount: "",
       FreeDesksCount: "",
       Occupiedpercentage: "",
-
+      totalDesk: 0,
+      usableDesk: 0,
+      occupiedDesk: 0,
+      freeDesk: 0,
       employees: [],
       FirstName: "",
       LastName: "",
@@ -25,6 +29,11 @@ export class officeStatus extends Component {
 
       OfficeNameFilter: "",
       OfficeWithoutFilter: [],
+
+      options: {
+        series: [],
+        labels: ["Total Desk", "Usable Desk", "Occupied Desk", "Free Desk"],
+      },
     };
   }
 
@@ -74,7 +83,19 @@ export class officeStatus extends Component {
     fetch(variables.API_URL + "Offices")
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ office: data, OfficeWithoutFilter: data });
+        let total = this.totalDesks(data);
+        let usable = this.totalUsable(data);
+        let occupied = this.totalOccupaid(data);
+        let free = this.totalFree(data);
+        this.setState({
+          office: data,
+          OfficeWithoutFilter: data,
+          totalDesk: total,
+          usableDesk: usable,
+          occupiedDesk: occupied,
+          freeDesk: free,
+          series: [total, usable, occupied, free],
+        });
       });
   }
 
@@ -167,6 +188,33 @@ export class officeStatus extends Component {
       });
   }
 
+  totalDesks(value) {
+    let x = 0;
+    value.forEach((element) => (x = x + element.TotalDesksCount));
+    return x;
+  }
+
+  totalUsable(value) {
+    let x = 0;
+    value.forEach((element) => (x = x + element.UsableDesksCount));
+    return x;
+  }
+
+  totalOccupaid(value) {
+    let x = 0;
+    value.forEach((element) => (x = x + element.OccupiedDesksCount));
+    return x;
+  }
+
+  totalFree(value) {
+    let x = 0;
+    value.forEach(
+      (element) =>
+        (x = x + (element.UsableDesksCount - element.OccupiedDesksCount))
+    );
+    return x;
+  }
+
   render() {
     const {
       office,
@@ -245,7 +293,8 @@ export class officeStatus extends Component {
                     </svg>
                   </button>
                 </td>
-                <td> {of.TotalDesksCount}</td>
+                <td> {of.TotalDesksCount} </td>
+
                 <td> {of.UsableDesksCount}</td>
                 <td> {of.OccupiedDesksCount}</td>
                 <td> {of.UsableDesksCount - of.OccupiedDesksCount}</td>
@@ -295,6 +344,16 @@ export class officeStatus extends Component {
             ))}
           </tbody>
         </table>
+
+        <div className="donut">
+          <Chart
+            options={this.state.options}
+            series={this.state.series}
+            type="donut"
+            width="380"
+          />
+        </div>
+        <label className="m-2">Metrics for buildings</label>
 
         <div
           className="modal fade"

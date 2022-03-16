@@ -55,11 +55,10 @@ export class Request extends Component {
   render() {
     return (
       <React.Fragment>
-        <br></br>
-        <h2 className=" m-2">Request to work remote</h2>
+        <h3 className=" m-2">Request to work remote</h3>
 
         <label className=" m-2">
-          Percentage of remote work time from a month *
+          Percentage of remote work time from a month: *
         </label>
         <div>
           <input
@@ -85,7 +84,7 @@ export class Request extends Component {
         <label className=" m-2">100%-fully remote</label>
         <div>
           <label className="Reason m-2">
-            The reason why I make this request *
+            The reason why I make this request: *
           </label>
         </div>
         <div>
@@ -106,6 +105,9 @@ export class Request extends Component {
         >
           Request
         </button>
+        <br></br>
+        <br></br>
+        <br></br>
       </React.Fragment>
     );
   }
