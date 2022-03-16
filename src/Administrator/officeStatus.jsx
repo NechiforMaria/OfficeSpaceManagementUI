@@ -353,7 +353,7 @@ export class officeStatus extends Component {
             width="380"
           />
         </div>
-        <label className="m-2">Metrics for buildings</label>
+        <label className="m-2">Metrics for all buildings</label>
 
         <div
           className="modal fade"
