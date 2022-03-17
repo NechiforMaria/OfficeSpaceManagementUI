@@ -17,7 +17,7 @@ import { Request } from "./Administrator/Request";
 import { Footer } from "./components/Footer/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 ///import LoginForm from "./components/Login/login";
-import Login from "./components/login/login";
+//import Login from "./components/login/login";
 
 class App extends Component {
   render() {
