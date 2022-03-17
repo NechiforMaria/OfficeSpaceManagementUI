@@ -14,35 +14,32 @@ const Login = () => {
     const[redirect, setRedirect] = useState(false);
     const[user, setUser] = useState(null);
     
-    const submit = async (e) => {
-        e.preventDefault();
+    // const submit = async (e) => {
+    //     e.preventDefault();
       
-        await fetch(variables.API_URL + 'users/authenticate',{
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-            },
-          // credentials: 'include',
-          body: JSON.stringify({
-            email,
-            password
-          })
+    //     await fetch(variables.API_URL + 'users/authenticate',{
+    //       method: 'POST',
+    //       headers: {
+    //         Accept: 'application/json',
+    //         'Content-Type': 'application/json'
+    //         },
+    //       // credentials: 'include',
+    //       body: JSON.stringify({
+    //         email,
+    //         password
+    //       })
           
-        })
-        .then((response) => response.json())
-        .then((data) => {setUser(data)})
-        setRedirect(true);
-    }
-    if(redirect && user === "Administrator"){
-      //setRedirect(false);
-     // setUser(null);
-      return <Redirect to="/userManagement"  component={UserManagement}/>
-    }
-    else
-    {
-
-    }
+    //     })
+    //     .then((response) => response.json())
+    //     .then((data) => {setUser(data)})
+    //     setRedirect(true);
+    // }
+    // if(redirect && user === "Administrator"){
+    //   //setRedirect(false);
+    //  // setUser(null);
+    //   return <Redirect to="/userManagement"  component={UserManagement}/>
+    // }
+    
     return (
       <div className="bkgImage">
         {/* <label className="navbar navbar-expand-lg navbar-dark bg-dark loginNav">
