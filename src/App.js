@@ -26,7 +26,7 @@ class App extends Component {
         
         <Router>
           <NavBarAdministrator />
-          <Login/>
+          {/* <Login/> */}
           <Switch>
             <Route path="/Approval">
               <Approval />
