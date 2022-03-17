@@ -49,7 +49,8 @@ const Login = () => {
           <hr className="dotted" />
         </label> */}
         <div className="containerLogin">
-          <form className="login-form" onSubmit={submit}>
+          <form className="login-form" onSubmit=''>
+            {/* </div>{submit}> */}
             <br />
             <i>
               <HiUserGroup
@@ -78,7 +79,7 @@ const Login = () => {
               className="input-fieldEmail"
               type="text"
               placeholder="Email"
-              onChange={e => setEmail(e.target.value)}
+              // onChange={e => setEmail(e.target.value)}
               required
             />
 
@@ -90,7 +91,7 @@ const Login = () => {
               className="input-fieldPassword"
               type="password"
               placeholder="Password"
-              onChange={e => setPassword(e.target.value)}
+              // onChange={e => setPassword(e.target.value)}
               required
             />
             <br />
