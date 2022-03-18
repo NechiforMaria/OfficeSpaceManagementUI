@@ -3,7 +3,7 @@ import "./login.css";
 import { BsFillPersonFill, BsFillLockFill } from "react-icons/bs";
 import { HiUserGroup } from "react-icons/hi";
 
-class Logi extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -116,4 +116,4 @@ class Logi extends Component {
     );
   }
 }
-export default LoginForm;
+export default Login;
