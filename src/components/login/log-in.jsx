@@ -3,7 +3,7 @@ import "./login.css";
 import { BsFillPersonFill, BsFillLockFill } from "react-icons/bs";
 import { HiUserGroup } from "react-icons/hi";
 
-class LoginForm extends Component {
+class Logi extends Component {
   constructor(props) {
     super(props);
 
