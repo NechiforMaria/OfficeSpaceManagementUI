@@ -99,12 +99,14 @@ export class Request extends Component {
         <div>
           <label className=" m-2">All fields with * must be completed</label>
         </div>
-        <button
-          className="btn btn-primary m-2"
-          onClick={() => this.requestClick()}
-        >
-          Request
-        </button>
+        {this.state.value !== 0 && this.state.textArea !== "" ? (
+          <button
+            className="btn btn-primary m-2"
+            onClick={() => this.requestClick()}
+          >
+            Request
+          </button>
+        ) : null}
         <br></br>
         <br></br>
         <br></br>

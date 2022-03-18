@@ -459,14 +459,25 @@ export class officeStatus extends Component {
                   />
                 </div>
               </div>
-
-              <button
-                type="button"
-                className="btn btn-primary float-start"
-                onClick={() => this.updateClick()}
-              >
-                Update office
-              </button>
+              {OfficeName &&
+              BuildingName &&
+              FloorNo &&
+              UsableDesksCount &&
+              TotalDesksCount &&
+              OccupiedDesksCount &&
+              UsableDesksCount <= TotalDesksCount &&
+              UsableDesksCount >= OccupiedDesksCount &&
+              TotalDesksCount > 0 &&
+              UsableDesksCount >= 0 &&
+              OccupiedDesksCount >= 0 ? (
+                <button
+                  type="button"
+                  className="btn btn-primary float-start"
+                  onClick={() => this.updateClick()}
+                >
+                  Update office
+                </button>
+              ) : null}
             </div>
           </div>
         </div>

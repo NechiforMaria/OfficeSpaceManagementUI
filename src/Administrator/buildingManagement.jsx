@@ -334,7 +334,7 @@ export class BuildingManagement extends Component {
 
               <div className="modal-body">
                 <div className="input-group mb-3">
-                  <span className="input-group-text">Building Name</span>
+                  <span className="input-group-text">Building Name *</span>
                   <input
                     type="text"
                     className="form-control"
@@ -346,7 +346,7 @@ export class BuildingManagement extends Component {
 
               <div className="modal-body">
                 <div className="input-group mb-3">
-                  <span className="input-group-text">Number Of Floors</span>
+                  <span className="input-group-text">Number Of Floors *</span>
                   <input
                     type="text"
                     className="form-control"
@@ -358,7 +358,7 @@ export class BuildingManagement extends Component {
 
               <div className="modal-body">
                 <div className="input-group mb-3">
-                  <span className="input-group-text">Building Address</span>
+                  <span className="input-group-text">Building Address *</span>
                   <input
                     type="text"
                     className="form-control"
@@ -496,13 +496,24 @@ export class BuildingManagement extends Component {
                 </div>
               </div>
 
-              <button
-                type="button"
-                className="btn btn-primary float-start"
-                onClick={() => this.createOfficeClick()}
-              >
-                Create office
-              </button>
+              {(OfficeName &&
+                TotalDesksCount &&
+                UsableDesksCount &&
+                OccupiedDesksCount) !== "" &&
+              TotalDesksCount > 0 &&
+              UsableDesksCount >= 0 &&
+              OccupiedDesksCount >= 0 &&
+              FloorNo >= 0 &&
+              UsableDesksCount <= TotalDesksCount &&
+              UsableDesksCount >= OccupiedDesksCount ? (
+                <button
+                  type="button"
+                  className="btn btn-primary float-start"
+                  onClick={() => this.createOfficeClick()}
+                >
+                  Create office
+                </button>
+              ) : null}
             </div>
           </div>
         </div>

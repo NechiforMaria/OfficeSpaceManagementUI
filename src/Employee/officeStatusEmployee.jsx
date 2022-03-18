@@ -25,6 +25,10 @@ export class officeStatusEmployee extends Component {
 
       OfficeNameFilter: "",
       OfficeWithoutFilter: [],
+
+      DeskReqMsg: "",
+      textArea: "",
+      newDesk: 0,
     };
   }
 
@@ -64,6 +68,9 @@ export class officeStatusEmployee extends Component {
         this.setState({ employees: data });
       });
   }
+
+  handlerOnChangeComment = (e) => this.setState({ textArea: e.target.value });
+  handlerOnChange = (e) => this.setState({ newDesk: e.target.value });
 
   render() {
     const { office, employees, modalTitle, OfficeName } = this.state;

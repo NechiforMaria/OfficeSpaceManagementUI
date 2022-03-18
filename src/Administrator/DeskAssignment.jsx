@@ -112,15 +112,8 @@ export class DeskAssignment extends Component {
   };
 
   render() {
-    const {
-      desk,
-      modalTitle,
-      EmployeeName,
-      DeskNo,
-      OfficeName,
-      OfficeAdmin,
-      BuildingName,
-    } = this.state;
+    const { desk, modalTitle, EmployeeName, DeskNo, OfficeName, BuildingName } =
+      this.state;
     return (
       <div>
         <table className="table table-striped">
@@ -256,14 +249,15 @@ export class DeskAssignment extends Component {
                   />
                 </div>
               </div>
-
-              <button
-                type="button"
-                className="btn btn-primary float-start"
-                onClick={() => this.updateClick()}
-              >
-                Assign desk
-              </button>
+              {(EmployeeName && DeskNo && OfficeName && BuildingName) !== "" ? (
+                <button
+                  type="button"
+                  className="btn btn-primary float-start"
+                  onClick={() => this.updateClick()}
+                >
+                  Assign desk
+                </button>
+              ) : null}
             </div>
           </div>
         </div>

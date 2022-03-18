@@ -1,4 +1,3 @@
-import { buttons } from "bootstrap-css";
 import React, { Component } from "react";
 import { variables } from "../components/Variables";
 
@@ -9,6 +8,7 @@ export class MyRequest extends Component {
     this.state = {
       requests: [],
       RequestMsg: "",
+      RemotePercent: "",
       ReqStatus: "",
     };
   }
@@ -35,6 +35,7 @@ export class MyRequest extends Component {
           <thead>
             <tr>
               <th>Request </th>
+              <th>Remote Percent</th>
               <th>Status Request</th>
             </tr>
           </thead>
@@ -42,6 +43,7 @@ export class MyRequest extends Component {
             {requests.map((req) => (
               <tr key={req.RequestMsg}>
                 <td> {req.RequestMsg}</td>
+                <td>{req.RemotePercent}%</td>
                 <td>
                   {req.ReqStatus === "Pending" ? (
                     <label>Pending</label>

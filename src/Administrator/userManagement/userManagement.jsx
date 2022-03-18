@@ -16,7 +16,7 @@ export class UserManagement extends Component {
       Passw: "",
       EmpRole: "",
       Gender: "",
-      BirthDate: "",
+      BirthDate: "0000-00-00T00:00:00",
       Nationality: "",
       EmpStatus: "",
       DeskNo: "",
@@ -351,14 +351,14 @@ export class UserManagement extends Component {
                 <td>
                   <button
                     style={
-                      us.EmpStatus === "active"
+                      us.EmpStatus === "Active"
                         ? { opacity: 1 }
                         : { opacity: 0.5 }
                     }
                     type="button"
                     className="btn btn-success mr-1"
                     id="active-status"
-                    onClick={() => this.statusUpdateClick("active", us.ID)}
+                    onClick={() => this.statusUpdateClick("Active", us.ID)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -376,14 +376,14 @@ export class UserManagement extends Component {
                 <td>
                   <button
                     style={
-                      us.EmpStatus !== "active"
+                      us.EmpStatus === "Inactive"
                         ? { opacity: 1 }
                         : { opacity: 0.5 }
                     }
                     type="button"
                     className="btn btn-danger mr-1"
                     id="inactive-status"
-                    onClick={() => this.statusUpdateClick("inactive", us.ID)}
+                    onClick={() => this.statusUpdateClick("Inactive", us.ID)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -503,6 +503,7 @@ export class UserManagement extends Component {
                     </option>
                     <option>Male</option>
                     <option>Female</option>
+                    <option>Other</option>
                   </select>
                 </div>
               </div>
@@ -544,7 +545,7 @@ export class UserManagement extends Component {
                       {" "}
                       Choose Status{" "}
                     </option>
-                    <option>Activate</option>
+                    <option>Active</option>
                     <option>Inactive</option>
                   </select>
                 </div>
@@ -619,7 +620,19 @@ export class UserManagement extends Component {
                 </div>
               </div>
 
-              {modalTitle === "Add user" ? (
+              {modalTitle === "Add user" &&
+              (FirstName &&
+                LastName &&
+                Email &&
+                Passw &&
+                EmpRole &&
+                Gender &&
+                EmpStatus &&
+                DeskNo &&
+                OfficeName &&
+                FloorNo &&
+                BuildingName &&
+                WorkRemote) !== "" ? (
                 <button
                   type="button"
                   className="btn btn-primary float-start"
@@ -629,7 +642,19 @@ export class UserManagement extends Component {
                 </button>
               ) : null}
 
-              {modalTitle === "Edit user" ? (
+              {modalTitle === "Edit user" &&
+              (FirstName &&
+                LastName &&
+                Email &&
+                Passw &&
+                EmpRole &&
+                Gender &&
+                EmpStatus &&
+                DeskNo &&
+                OfficeName &&
+                FloorNo &&
+                BuildingName &&
+                WorkRemote) !== "" ? (
                 <button
                   type="button"
                   className="btn btn-primary float-start"
