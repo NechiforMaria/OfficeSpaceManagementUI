@@ -13,7 +13,7 @@ import { MyRequest } from "./Administrator/MyRequest";
 import { Request } from "./Administrator/Request";
 import { Footer } from "./components/Footer/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Login from "./components/Login/log-in";
+//import Login from "./components/Login/log-in";
 
 class App extends Component {
   render() {
@@ -28,7 +28,7 @@ class App extends Component {
             <Route path="/MyRequest" component={MyRequest} />
             <Route path="/Approval" component={Approval} />
             <Route path="/DeskAssignment" component={DeskAssignment} />
-            <Route path="/userManagement" component={UserManagement} />
+
             <Route path="/userStatus" component={UserStatus} />
             <Route
               path="/officeStatusOfAdministrator"
@@ -40,7 +40,8 @@ class App extends Component {
             />
             <Route path="/officeStatus" component={officeStatus} />
             <Route path="/buildingManagement" component={BuildingManagement} />
-            <Route path="/" component={Login} />
+            {/* <Route path="/" component={Login} /> */}
+            <Route path="/" component={UserManagement} />
           </Switch>
         </Router>
         <Footer />
