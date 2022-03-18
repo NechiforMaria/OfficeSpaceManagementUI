@@ -116,7 +116,3 @@ export class LoginForm extends Component {
     );
   }
 }
-LoginForm.defaultProps = {
-  Username: "",
-  Password: "",
-};
