@@ -44,12 +44,6 @@ export class LoginForm extends React.Component {
   render() {
     return (
       <div className="bkgImage">
-        {/* <label className="navbar navbar-expand-lg navbar-dark bg-dark loginNav">
-          <span className="navbar-brand">
-            <img className=" logLogin" src={logo} alt="No More Bugs" style={{float: "left"}} />
-          </span>
-          <hr className="dotted" />
-        </label> */}
         <div className="containerLogin">
           <form className="login-form" onSubmit={this.handleSubmit}>
             <br />
