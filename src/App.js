@@ -13,7 +13,7 @@ import { MyRequest } from "./Administrator/MyRequest";
 import { Request } from "./Administrator/Request";
 import { Footer } from "./components/Footer/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Login from "./components/Login/log-in.jsx";
+import Login from "./components/Login/log-in";
 
 class App extends Component {
   render() {
