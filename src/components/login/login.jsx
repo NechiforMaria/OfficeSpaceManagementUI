@@ -4,7 +4,7 @@ import { BsFillPersonFill, BsFillLockFill } from "react-icons/bs";
 import { HiUserGroup } from "react-icons/hi";
 import logo from "./Logo.jpg";
 
-export class LoginForm extends React.Component {
+export class LoginForm extends Component {
   constructor(props) {
     super(props);
 
