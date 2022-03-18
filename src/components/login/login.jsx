@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import "./login.css";
 import { BsFillPersonFill, BsFillLockFill } from "react-icons/bs";
 import { HiUserGroup } from "react-icons/hi";
