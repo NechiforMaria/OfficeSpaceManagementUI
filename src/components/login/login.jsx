@@ -2,6 +2,7 @@ import React from "react";
 import "./login.css";
 import { BsFillPersonFill, BsFillLockFill } from "react-icons/bs";
 import { HiUserGroup } from "react-icons/hi";
+import logo from "./Logo.jpg";
 
 export class LoginForm extends React.Component {
   constructor(props) {
@@ -44,6 +45,12 @@ export class LoginForm extends React.Component {
   render() {
     return (
       <div className="bkgImage">
+        {/* <label className="navbar navbar-expand-lg navbar-dark bg-dark loginNav">
+          <span className="navbar-brand">
+            <img className=" logLogin" src={logo} alt="No More Bugs" style={{float: "left"}} />
+          </span>
+          <hr className="dotted" />
+        </label> */}
         <div className="containerLogin">
           <form className="login-form" onSubmit={this.handleSubmit}>
             <br />
